@@ -2,6 +2,19 @@ package chainedstory
 
 class StoriesService {
 
+	def addStory(parameters) {
+		def theParagraph = new Paragraph(author:parameters.author, content:parameters.content, leftSteps : 10)
+		def resp = [:]
+		if (theParagraph.validate()) {
+			theParagraph.save()
+			resp.status = 0
+			resp.objId = theParagraph.id
+		} else {
+			throw new RuntimeException(theParagraph.errors.toString())
+		}
+		return resp
+	}
+	
     def getParagraphs() {
 
     }
