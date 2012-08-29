@@ -27,6 +27,7 @@
 			</article>
 			<hr>
 			<form action="/stories/add" class="ch-form" method="post">
+				<input type="hidden" name="paragraph_id" value="${paragraph.id}"/>
 				<div class="cs-media">
 					<a href="https://www.facebook.com/${request.getAttribute('facebook')?.user_id}" class="cs-img">
 						<img src="https://graph.facebook.com/${request.getAttribute('facebook')?.user_id}/picture?type=square" width="50" height="50">

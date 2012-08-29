@@ -10,7 +10,7 @@ class StoriesService {
 
 		//generate new story
 		def theStory = new Story(name:"another one bites the dust", author:parameters.author, status:0)
-		def userName = JSON.parse(new URL(getUserUrl(parameters.author, parameters.access_token)).text).first_name;
+		def userName = JSON.parse(new URL(getUserUrl(parameters.author, parameters.oauthToken)).text).first_name;
 		theStory.authorName = userName;
 		theStory.validate()
 		theStory.save()
@@ -44,33 +44,35 @@ class StoriesService {
 		theStory.save()
 		return theParagraph.id
 	}
-	def validateParagraph(storyId, parentParagraphId) {
-	
+	def validateParagraph(parentParagraphId) {
 		def theParagraph = Paragraph.get(parentParagraphId)
-		println theParagraph
-		println theParagraph.storyId == (Long)storyId
-		println theParagraph.leftSteps > 0
-		return theParagraph != null && theParagraph.storyId == storyId && theParagraph.leftSteps > 0 
+		return theParagraph != null && theParagraph.leftSteps > 0 
 	}
-	def addParagraph(storyId, parentParagraphId, author, text, access_token) {
+	def addParagraph(parameters) {
 		//validate
-		if (!validateParagraph(storyId, parentParagraphId)) {
+		if (!validateParagraph(parameters.paragraph)) {
 			println "Error validando"
 			
 		} else {
-			def theStory = Story.get(storyId)
+			def parentParagraph = Paragraph.get(parameters.paragraph)
+			def theStory = parentParagraph.story
 			
-			def userName = JSON.parse(new URL(getUserUrl(author, access_token)).text).first_name;
-			def parentParagraph = Paragraph.get(parentParagraphId)
+			def userName = JSON.parse(new URL(getUserUrl(parameters.author, parameters.oauthToken)).text).first_name;
 			
-			def theParagraph = new Paragraph(parent:parentParagraph, author:author, authorName: userName, content:text, leftSteps : parentParagraph.leftSteps-1, story:theStory)
+			Paragraph theParagraph = new Paragraph(parent:parentParagraph, author:parameters.author, authorName: userName, content:parameters.content, leftSteps : parentParagraph.leftSteps-1, story:theStory)
 			
 			if (theParagraph.validate())
 				theParagraph.save()
 			else
 				throw new RuntimeException(theParagraph.errors.toString())
-				
-			def resp = JSON.parse(new URL(getActionUrl("http://samples.ogp.me/222499907876025", text)).text);
+			def url
+			if(Environment.isDevelopmentMode()){
+				url = "http://samples.ogp.me/222499907876025"
+			}
+			else{
+				url = "http://www.chainedstory.com/stories/paragraph/" + theParagraph
+			}
+			def resp = JSON.parse(new URL(getActionUrl(url, parameters.content,parameters.oauthToken)).text);
 		
 			theParagraph.facebookId = resp.id
 			theParagraph.save()
@@ -143,18 +145,23 @@ class StoriesService {
 		if (userParagraph) {
 			actualParagraph = userParagraph.parent;
 			while (actualParagraph != null) {
-				actualStory.paragraphs = [actualParagraph.properties] + actualStory.paragraphs
+				def para = actualParagraph.properties
+				para.pid = actualParagraph.id
+				actualStory.paragraphs = [para] + actualStory.paragraphs
 				actualParagraph = actualParagraph.parent
 			}
 			actualParagraph = userParagraph
 		} else
 			actualParagraph = story.rootParagraph
-			
-		actualStory.paragraphs.add( actualParagraph.properties)
+		def para = actualParagraph.properties
+		para.pid = actualParagraph.id
+		actualStory.paragraphs.add( para)
 		while (actualParagraph && actualParagraph.children && actualParagraph.children.size() != 0) {
 			def option = rand.nextInt(actualParagraph.children?.size())
 			actualParagraph = actualParagraph.children.getAt(option)
-			actualStory.paragraphs.add( actualParagraph.properties)
+			para = actualParagraph.properties
+			para.pid = actualParagraph.id
+			actualStory.paragraphs.add( para)
 		}
 
 		return actualStory
@@ -178,7 +185,7 @@ class StoriesService {
 			if (p.leftSteps != 0) {
 				if  (p.children?.size() != 0) {
 					p.children.each {
-						openBranches.push(it)
+						pending.push(it)
 					}
 				} else isFinished = false;
 			}
