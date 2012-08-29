@@ -5,7 +5,9 @@ class StoriesController {
 	
     def index() { 
 		println "want to get story ${params.id}"
-		return storiesService.get(params.id)
+		def story = storiesService.getStory(params.id)
+		println story
+		return story
 		
 	
 	}

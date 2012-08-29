@@ -1,7 +1,5 @@
 package chainedstory
 import grails.converters.JSON
-import static groovyx.gpars.GParsPool.runForkJoin
-import static groovyx.gpars.GParsPool.withPool
 
 
 class StoriesService {
