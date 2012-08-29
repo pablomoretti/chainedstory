@@ -1,12 +1,21 @@
 package chainedstory
 import grails.converters.JSON
-
+import java.util.Random
 
 class StoriesService {
 	def transactional = true
 
 	def addStory(parameters) {
-		def theParagraph = new Paragraph(author:parameters.author, content:parameters.content, leftSteps : 10)
+		//generate new story
+		def theStory = new Story(name:"another one bites the dust", author:parameters.author, status:0)
+		def userName = JSON.parse(new URL(getUserUrl(parameters.author)).text).first_name;
+		theStory.authorName = userName;
+		println "sved story ${theStory.properties.toString()}"
+		theStory.validate()
+		println theStory.errors
+		theStory.save()
+		println "sved story ${theStory.properties.toString()}"
+		def theParagraph = new Paragraph(author:parameters.author, authorName: userName, content:parameters.content, leftSteps : 10, story:theStory)
 		if (theParagraph.validate()) 
 			theParagraph.save()
 		else 
@@ -15,32 +24,70 @@ class StoriesService {
 		theParagraph.facebookId = resp.id
 		theParagraph.save()
 		println theParagraph.properties.toString()
+		theStory.rootParagraph = theParagraph;
+		theStory.save()
 		return theParagraph.id
 	}
 	
 	def getActionUrl (objectUrl, text) {
 		return "https://graph.facebook.com/me/chainedstory-dev:write?paragraph=" +
 			objectUrl.encodeAsURL() +
-			"&access_token=AAADKSQrqTwgBAOef6qHxnpSwCWQksGyDtHhgtwUGrVAoptiM3fU6lv5uU6ImKXK0qwgTysJjqmILZAskQBTEmmPblyIa4qIlzH8azcOD1t744UWnZC&method=post" +
+			"&access_token=AAADKSQrqTwgBAGItLVDIkmwKuHUQXVxDjsGZCB3xTYjAozqNS2zoQGzOSQdCVFSDqA5b8W73DxBeEaF0AKsZCchWBGLVLW7PGZAIPKlnI75FVYZCad9b&method=post" +
 			"&text=$text"
+	}
+	def getUserUrl (fbId) {
+		return "https://graph.facebook.com/${fbId}?access_token=AAADKSQrqTwgBAGItLVDIkmwKuHUQXVxDjsGZCB3xTYjAozqNS2zoQGzOSQdCVFSDqA5b8W73DxBeEaF0AKsZCchWBGLVLW7PGZAIPKlnI75FVYZCad9b"
 	}
 	def getStory(id) {
 	return [
-		[facebook_id:"1", user_id:"2", name:"juancito",text:"texto1"],
-		[facebook_id:"2", user_id:"3", name:"juancito",text:"texto1"],
-		[facebook_id:"3", user_id:"4", name:"juancito",text:"texto1"],
-		[facebook_id:"4", user_id:"5", name:"juancito",text:"texto1"]
-		
+		id:1, 
+		name:"another one bites the dust", 
+		author:"3", 
+		authorName:"juanitoull",
+		paragraphs:[
+			[facebook_id:"1", user_id:"2", name:"juancito",text:"texto1"],
+			[facebook_id:"2", user_id:"3", name:"juancito",text:"texto1"],
+			[facebook_id:"3", user_id:"4", name:"juancito",text:"texto1"],
+			[facebook_id:"4", user_id:"5", name:"juancito",text:"texto1"]
+		]
 	]
 	}
 
-	def getCompleteStory(paragraph) {
-		def root = getRootParagraph(paragraph)
-		if (isFinished)
-			println "caca"
+	def getCompleteStory(storyId, userId) {
+		//check if there is a paragraph from the user in the story
+		Random rand = new Random()
+
+
+		def story = Story.get(storyId)
+		if (isFinished(story))
+			println "historia terminada"
 		else
-			throw new RuntimeException("Story is not finished yet")
+			println "no terminada"
+
+		def userParagraph 
+		if (userId) 
+			userParagraph = Paragraph.findByAuthorAndStoryId(userId, storyId)
 		
+		def actualStory = [id:story.id, name:story.name, author:story.author, authorName :story.authorName, paragraphs:[]]
+		def actualParagraph
+		if (userParagraph) {
+			actualParagraph = userParagraph.parent;
+			while (actualParagraph != null) {
+				actualStory.paragraphs = [actualParagraph] + actualStory.paragraphs
+				actualParagraph = actualParagraph.parent
+			}
+			actualParagraph = userParagraph
+		} else
+			actualParagraph = story.rootParagraph
+			
+		actualStory.paragraphs << actualParagraph
+		while (actualParagraph.children?.size() != 0) {
+			def option = rand.nextInt(actualParagraph.children.size())
+			actualParagraph = actualParagraph.children.getat(option)
+			actualStory.paragraphs << actualParagraph
+		}
+		
+		return actualStory
 	}
 	def getRootParagraph(paragraph) {
 		def parent = paragraph.parent
@@ -51,13 +98,13 @@ class StoriesService {
 		return paragraph
 	}
 
-	private boolean isFinished(rootParagraph) {
-		def pending = [rootParagraph]
+	private boolean isFinished(story) {
+		def pending = [story.rootParagraph]
 		def isFinished = true
-		while (isFinished && ! pending.empty()) {
+		while (isFinished &&  pending.size()!= 0) {
 			def p = pending.pop()
 			if (p.leftSteps != 0) {
-				if  (!p.children.empty()) {
+				if  (p.children?.size() != 0) {
 					p.children.each {
 						openBranches.push(it)
 					}
