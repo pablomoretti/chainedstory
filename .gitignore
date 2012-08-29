@@ -1,0 +1,6 @@
+.classpath
+.groovy/
+.project
+.settings/
+target-eclipse/
+target/
