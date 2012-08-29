@@ -31,7 +31,7 @@ class StoriesService {
 			url = "http://samples.ogp.me/222499907876025"
 		}
 		else{
-			url = "http://www.chainedstory.com/stories/paragraph/" + theParagraph
+			url = "http://www.chainedstory.com/stories/paragraph/" + theParagraph.id.toString()
 		}
 
 		def resp = JSON.parse(new URL(getActionUrl(url, parameters.content,parameters.oauthToken)).text);
