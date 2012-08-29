@@ -210,6 +210,13 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /**/
+
+hr {
+	width: 90%;
+	color: #f9f9f9;
+	margin-top: 20px;
+}
+
 .cs-logo {
 	color: #C3AA8F;
 	font-family: "Lobster Two", cursive;
@@ -218,6 +225,13 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: bold;
 	font-style: italic;
 	text-align: center;
+}
+
+.cs-link-view {
+	background: #ffffff url("../assets/linebottom.png") repeat-x left bottom;
+	max-width: 600px;
+	margin: 0 auto;
+	padding-bottom: 12px;
 }
 
 .cs-link-view header {
@@ -229,15 +243,13 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 0;
 }
 
-.cs-link-view {
-	background: #ffffff url("../assets/linebottom.png") repeat-x left bottom;
-	max-width: 600px;
-	margin: 0 auto;
-	padding-bottom: 12px;
-}
-
 .cs-paragraph {
-	padding: 10px;
+	padding: 10px 10px 0;
+}
+.cs-paragraph blockquote {
+	margin: 10px 10px 0;
+	padding-left: 5px;
+	font-style: italic;
 }
 
 .cs-link-view textarea,
@@ -245,7 +257,18 @@ h1, h2, h3, h4, h5, h6 {
 	border: none;
 	box-shadow: none;
 	margin: 0;
+	padding: 0;
+	padding-left: 5px;
+}
+
+.cs-link-view .ch-form {
 	padding: 10px;
+}
+
+.cs-link-view legend{
+	color: #333;
+	font-weight: normal;
+	padding-bottom: 10px;
 }
 
 .cs-link-view textarea {
