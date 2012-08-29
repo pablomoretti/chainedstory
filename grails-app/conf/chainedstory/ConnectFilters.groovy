@@ -1,6 +1,7 @@
 package chainedstory
 
 import grails.converters.JSON
+import grails.util.Environment;
 
 import org.apache.commons.codec.binary.Base64
 import org.apache.commons.lang.StringUtils;
@@ -17,32 +18,34 @@ class ConnectFilters {
 
 	def filters = {
 
-		all(controller:'ho', action:'*') {
+		all(controller:'stories', action:'*') {
 
 			before = {
 
-				def auth_url = "https://www.facebook.com/dialog/oauth?client_id=${appId}&redirect_uri=${canvasPage.encodeAsURL()}"
-
 				def input  = params.signed_request
 
-				if(!input){
-					redirect(uri:canvasPage)
-					return true
+				Map facebookUser
+
+				if(Environment.isDevelopmentMode() && !input){
+					facebookUser = [issued_at:1346263267, expires:1346270400, oauth_token:"AAADKSQrqTwgBABQE3xYOCNAD6oW096BK9ZBM0zFJ83TNlpatMZAI7xc4MR03YlqZCIw7BVEp9lIjVRf07ZCi5hJeayhf7rHTPfaZBFBxXyYEHpNohpe3g", user_id:1426088112, user:[age:[min:21], locale:"es_LA", country:"ar"], algorithm:"HMAC-SHA256"]
 				}else{
 
-					String[] split = input.split("[.]", 2);
+					def auth_url = "https://www.facebook.com/dialog/oauth?client_id=${appId}&redirect_uri=${canvasPage.encodeAsURL()}"
 
-					Map envelope = (Map) JSON.parse(new String( base64UrlDecode(split[1])));
-
-					println envelope
-
-					if(!envelope['user_id']){
-						redirect(controller:'oauth')
+					if(!input){
+						redirect(uri:canvasPage)
 						return true
+					}else{
+						String[] split = input.split("[.]", 2);
+
+						facebookUser = (Map) JSON.parse(new String( base64UrlDecode(split[1])));
+
+						if(!envelope['user_id']){
+							redirect(controller:'oauth')
+							return true
+						}
 					}
-					else{
-						request.setAttribute("facebook",envelope)
-					}
+					request.setAttribute("facebook",facebookUser)
 				}
 			}
 			after = { Map model ->
