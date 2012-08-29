@@ -18,10 +18,9 @@
 			<article class="cs-paragraph">
 				<div class="cs-media">
 					<a href="https://www.facebook.com/${paragraph.author}" class="cs-img">
-						<img src="https://graph.facebook.com/${paragraph.author}/picture?type=square" width="50" height="50">
+						<img src="https://graph.facebook.com/${paragraph.author}/picture?type=square" alt="${paragraph.author}" width="50" height="50">
 					</a>
 					<div class="cs-bd">
-						<p><a href="https://www.facebook.com/${paragraph.author}">${paragraph.author}</a> wrote:</p>
 						<blockquote>${paragraph.content}</blockquote>
 					</div>
 				</div>
@@ -32,11 +31,8 @@
 					<a href="https://www.facebook.com/${request.getAttribute('facebook')?.user_id}" class="cs-img">
 						<img src="https://graph.facebook.com/${request.getAttribute('facebook')?.user_id}/picture?type=square" width="50" height="50">
 					</a>
-					<div class="cs-bd">
-						<p><a href="https://www.facebook.com/${request.getAttribute('facebook')?.user_id}">Me</a>:</p>
-						<div class="ch-form-row">
-							<textarea placeholder="Write a new paragraph, fold and share..." id="paragraph" name="paragraph" maxlength="512"></textarea>
-						</div>
+					<div class="cs-bd ch-form-row">
+						<textarea required placeholder="Write a new paragraph, fold and share..." id="paragraph" name="paragraph" maxlength="512"></textarea>
 					</div>
 				</div>
 				<p class="ch-form-actions">
