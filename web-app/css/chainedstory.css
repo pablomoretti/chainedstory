@@ -227,11 +227,19 @@ hr {
 	text-align: center;
 }
 
-.cs-link-view {
-	background: #ffffff url("../assets/linebottom.png") repeat-x left bottom;
+.cs-link-view,
+.cs-message-ok {
 	max-width: 600px;
 	margin: 0 auto;
 	padding-bottom: 12px;
+}
+
+.cs-link-view {
+	background: #ffffff url("../assets/linebottom.png") repeat-x left bottom;
+}
+
+.cs-message-ok {
+	text-align: center;
 }
 
 .cs-link-view header {

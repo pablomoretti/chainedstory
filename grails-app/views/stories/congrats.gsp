@@ -9,6 +9,11 @@
 		<header class="cs-header">
 			<h1 class="cs-logo">Chainedstory</h1>
 		</header>
-			Listo, te avisaremos cuando la historia termine.
+		<section class="cs-link-view">
+			<div class="cs-message-ok">
+				<i class="ch-icon-ok-sign"></i>
+				<span>Everything is great!</span>
+			<div>
+		</section>
 	</body>
 </html>
