@@ -10,7 +10,7 @@ class StoriesService {
 
 		//generate new story
 		def theStory = new Story(name:"another one bites the dust", author:parameters.author, status:0)
-		def userName = JSON.parse(new URL(getUserUrl(parameters.author)).text).first_name;
+		def userName = JSON.parse(new URL(getUserUrl(parameters.author,parameters.oauthToken)).text).first_name;
 		theStory.authorName = userName;
 		theStory.validate()
 		theStory.save(flush:true)
@@ -61,8 +61,8 @@ class StoriesService {
 	}
 
 
-	def getUserUrl (fbId) {
-		return "https://graph.facebook.com/${fbId}?access_token=AAADKSQrqTwgBAGItLVDIkmwKuHUQXVxDjsGZCB3xTYjAozqNS2zoQGzOSQdCVFSDqA5b8W73DxBeEaF0AKsZCchWBGLVLW7PGZAIPKlnI75FVYZCad9b"
+	def getUserUrl (fbId,oauthToken) {
+		return "https://graph.facebook.com/${fbId}?access_token=${oauthToken}"
 	}
 	
 	
