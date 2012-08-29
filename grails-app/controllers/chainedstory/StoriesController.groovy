@@ -4,6 +4,8 @@ class StoriesController {
 	def storiesService
 	
     def index() { 
+		println "want to get story ${params.id}"
+		return storiesService.get(params.id)
 		
 	
 	}
@@ -14,12 +16,7 @@ class StoriesController {
 		redirect(action:"congrats", params:[id:newStory])
 	}
 	
-	def getStory() {
-		println "want to get story ${params.storyId}"
-		def sampleStory = [
-				[author:"juancito"]
-			]
-		redirect(action:'congrats')
+	def view() {
 	}
 	
 	def congrats(){

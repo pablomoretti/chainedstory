@@ -26,6 +26,24 @@ class StoriesService {
 			"&access_token=AAADKSQrqTwgBAOef6qHxnpSwCWQksGyDtHhgtwUGrVAoptiM3fU6lv5uU6ImKXK0qwgTysJjqmILZAskQBTEmmPblyIa4qIlzH8azcOD1t744UWnZC&method=post" +
 			"&text=$text"
 	}
+	def getStory(id) {
+	return [
+		[facebook_id:"1", user_id:"2", name:"juancito",text:"texto1"],
+		[facebook_id:"2", user_id:"3", name:"juancito",text:"texto1"],
+		[facebook_id:"3", user_id:"4", name:"juancito",text:"texto1"],
+		[facebook_id:"4", user_id:"5", name:"juancito",text:"texto1"]
+		
+	]
+	}
+
+	def getCompleteStory(paragraph) {
+		def root = getRootParagraph(paragraph)
+		if (isFinished)
+			println "caca"
+		else
+			throw new RuntimeException("Story is not finished yet")
+		
+	}
 	def getRootParagraph(paragraph) {
 		def parent = paragraph.parent
 		while (parent != null) {
