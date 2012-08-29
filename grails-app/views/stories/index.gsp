@@ -11,14 +11,14 @@
 		</header>
 		<section class="cs-link-view">
 			<header>
-				<h2>Create a new story...</h2>
+				<h2>Create a new story</h2>
 			</header>
 			<form action="/stories/add" class="ch-form" method="post">
 				<div class="ch-form-row">
 					<textarea placeholder="Start an awesome story with your friends..." name="paragraph" maxlength="512"></textarea>
 				</div>
 				<p class="ch-form-actions">
-					<input type="submit" name="fold" value="Create and share" class="ch-btn" />
+					<input type="submit" name="fold" value="Create And Share" class="ch-btn" />
 				</p>
 			</form>
 		</section>

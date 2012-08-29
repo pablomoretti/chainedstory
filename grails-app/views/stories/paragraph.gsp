@@ -11,7 +11,7 @@
 		</header>
 		<section class="cs-link-view">
 			<header>
-				<h2>Write a new paragrph...</h2>
+				<h2>Write a new paragraph</h2>
 			</header>
 			<div class="cs-paragraph">
 				<p>Pablo Morreti wrote:</p>
