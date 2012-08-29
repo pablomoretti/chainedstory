@@ -8,7 +8,7 @@ class StoriesService {
 	def addStory(parameters) {
 		//generate new story
 		def theStory = new Story(name:"another one bites the dust", author:parameters.author, status:0)
-		def userName = JSON.parse(new URL(getUserUrl(parameters.author)).text).first_name;
+		def userName = JSON.parse(new URL(getUserUrl(parameters.author, parameters.access_token)).text).first_name;
 		theStory.authorName = userName;
 		println "sved story ${theStory.properties.toString()}"
 		theStory.validate()
@@ -28,6 +28,45 @@ class StoriesService {
 		theStory.save()
 		return theParagraph.id
 	}
+	def validateParagraph(storyId, parentParagraphId) {
+	
+		def theParagraph = Paragraph.get(parentParagraphId)
+		println theParagraph
+		println theParagraph.storyId == (Long)storyId
+		println theParagraph.leftSteps > 0
+		return theParagraph != null && theParagraph.storyId == storyId && theParagraph.leftSteps > 0 
+	}
+	def addParagraph(storyId, parentParagraphId, author, text, access_token) {
+		//validate
+		if (!validateParagraph(storyId, parentParagraphId)) {
+			println "Error validando"
+			
+		} else {
+			def theStory = Story.get(storyId)
+			
+			def userName = JSON.parse(new URL(getUserUrl(author, access_token)).text).first_name;
+			def parentParagraph = Paragraph.get(parentParagraphId)
+			
+			def theParagraph = new Paragraph(parent:parentParagraph, author:author, authorName: userName, content:text, leftSteps : parentParagraph.leftSteps-1, story:theStory)
+			
+			if (theParagraph.validate())
+				theParagraph.save()
+			else
+				throw new RuntimeException(theParagraph.errors.toString())
+				
+			def resp = JSON.parse(new URL(getActionUrl("http://samples.ogp.me/222499907876025", text)).text);
+		
+			theParagraph.facebookId = resp.id
+			theParagraph.save()
+			if (parentParagraph.children == null )
+				parentParagraph.children = []
+			parentParagraph.children.add( theParagraph) 
+			parentParagraph.save()
+			
+			return theParagraph.id
+
+		}		
+	}
 	
 	def getActionUrl (objectUrl, text) {
 		return "https://graph.facebook.com/me/chainedstory-dev:write?paragraph=" +
@@ -35,8 +74,8 @@ class StoriesService {
 			"&access_token=AAADKSQrqTwgBAGItLVDIkmwKuHUQXVxDjsGZCB3xTYjAozqNS2zoQGzOSQdCVFSDqA5b8W73DxBeEaF0AKsZCchWBGLVLW7PGZAIPKlnI75FVYZCad9b&method=post" +
 			"&text=$text"
 	}
-	def getUserUrl (fbId) {
-		return "https://graph.facebook.com/${fbId}?access_token=AAADKSQrqTwgBAGItLVDIkmwKuHUQXVxDjsGZCB3xTYjAozqNS2zoQGzOSQdCVFSDqA5b8W73DxBeEaF0AKsZCchWBGLVLW7PGZAIPKlnI75FVYZCad9b"
+	def getUserUrl (fbId, access_token) {
+		return "https://graph.facebook.com/${fbId}?access_token=${access_token}"
 	}
 	def getStory(id) {
 	return [
@@ -73,18 +112,18 @@ class StoriesService {
 		if (userParagraph) {
 			actualParagraph = userParagraph.parent;
 			while (actualParagraph != null) {
-				actualStory.paragraphs = [actualParagraph] + actualStory.paragraphs
+				actualStory.paragraphs = [actualParagraph.properties] + actualStory.paragraphs
 				actualParagraph = actualParagraph.parent
 			}
 			actualParagraph = userParagraph
 		} else
 			actualParagraph = story.rootParagraph
 			
-		actualStory.paragraphs << actualParagraph
-		while (actualParagraph.children?.size() != 0) {
-			def option = rand.nextInt(actualParagraph.children.size())
-			actualParagraph = actualParagraph.children.getat(option)
-			actualStory.paragraphs << actualParagraph
+		actualStory.paragraphs.add( actualParagraph.properties)
+		while (actualParagraph && actualParagraph.children && actualParagraph.children.size() != 0) {
+			def option = rand.nextInt(actualParagraph.children?.size())
+			actualParagraph = actualParagraph.children.getAt(option)
+			actualStory.paragraphs.add( actualParagraph.properties)
 		}
 		
 		return actualStory
