@@ -7,9 +7,7 @@
 	</head>
 	<body>
 		<header class="cs-header">
-			<h1 class="cs-logo">
-				<a href="#">chainedstory</a>
-			</h1>
+			<h1 class="cs-logo">Chainedstory</h1>
 		</header>
 			Listo, te avisaremos cuando la historia termine.
 	</body>

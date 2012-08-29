@@ -14,5 +14,6 @@ class Paragraph {
 	static constraints = {
 		parent nullable:true
 		facebookId nullable:true
+		children nullable:true
     }
 }

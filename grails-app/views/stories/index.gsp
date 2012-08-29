@@ -7,20 +7,18 @@
 	</head>
 	<body>
 		<header class="cs-header">
-			<h1 class="cs-logo">
-				<a href="#">chainedstory</a>
-			</h1>
+			<h1 class="cs-logo">Chainedstory</h1>
 		</header>
 		<section class="cs-link-view">
 			<header>
-				<h2>Create a new chained story...</h2>
+				<h2>Create a new story</h2>
 			</header>
 			<form action="/stories/add" class="ch-form" method="post">
 				<div class="ch-form-row">
-					<textarea placeholder="Start an awesome story with your friends..." name="paragraph"></textarea>
+					<textarea placeholder="Start an awesome story with your friends..." name="paragraph" maxlength="512"></textarea>
 				</div>
 				<p class="ch-form-actions">
-					<input type="submit" name="fold" value="Create" class="ch-btn" />
+					<input type="submit" name="fold" value="Create And Share" class="ch-btn" />
 				</p>
 			</form>
 		</section>

@@ -19,9 +19,14 @@ class StoriesController {
 		def sampleStory = [
 				[author:"juancito"]
 			]
+		redirect(action:'congrats')
 	}
 	
 	def congrats(){
 		
+	}
+	
+	def paragraph(){
+		return ['paragraph':Paragraph.findById(params.id)]
 	}
 }
