@@ -2,15 +2,16 @@ package chainedstory
 
 class Story {
 	
-/*	def id
-	def name
+	String name
+	String author
+	String authorName
+	Integer status
+	Paragraph rootParagraph
 	
-	def creator
-	def contributors
-	def branches
-	def status
-	*/
+	static hasMany = [paragraphs:Paragraph]
 	
     static constraints = {
+		authorName nullable:true
+		rootParagraph nullable:true	
     }
 }

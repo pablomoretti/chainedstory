@@ -1,22 +1,32 @@
 package chainedstory
 import grails.converters.JSON
 import grails.util.Environment;
-
+import java.util.Random
 
 class StoriesService {
 	def transactional = true
 
 	def addStory(parameters) {
-		def theParagraph = new Paragraph(author:parameters.author, content:parameters.content, leftSteps : 10)
-		if (theParagraph.validate()) {
+
+		//generate new story
+		def theStory = new Story(name:"another one bites the dust", author:parameters.author, status:0)
+		def userName = JSON.parse(new URL(getUserUrl(parameters.author)).text).first_name;
+		theStory.authorName = userName;
+		theStory.validate()
+		theStory.save()
+		
+		Paragraph theParagraph = new Paragraph(author:parameters.author, authorName: userName, content:parameters.content, leftSteps : 10)
+		
+		theParagraph.story = theStory;
+		
+		if (theParagraph.validate())
 			theParagraph.save()
-		}
 		else {
 			throw new RuntimeException(theParagraph.errors.toString())
 		}
 
 		def url = ""
-		
+
 		if(Environment.isDevelopmentMode()){
 			url = "http://samples.ogp.me/222499907876025"
 		}
@@ -27,7 +37,11 @@ class StoriesService {
 		def resp = JSON.parse(new URL(getActionUrl(url, parameters.content,parameters.oauthToken)).text);
 		theParagraph.facebookId = resp.id
 		theParagraph.save()
-		println theParagraph.properties.toString()
+		
+		println theParagraph.id.toString()
+		
+		theStory.rootParagraph = theParagraph;
+		theStory.save()
 		return theParagraph.id
 	}
 
@@ -42,25 +56,72 @@ class StoriesService {
 		return "https://graph.facebook.com/me/${namespage}:write?paragraph=" +
 		objectUrl.encodeAsURL() +
 		"&access_token=${oauthToken}&method=post" +
-		"&text=$text"
+		"&text=${text.encodeAsURL()}"
+
 	}
+
+
+	def getUserUrl (fbId) {
+		return "https://graph.facebook.com/${fbId}?access_token=AAADKSQrqTwgBAGItLVDIkmwKuHUQXVxDjsGZCB3xTYjAozqNS2zoQGzOSQdCVFSDqA5b8W73DxBeEaF0AKsZCchWBGLVLW7PGZAIPKlnI75FVYZCad9b"
+	}
+	
+	
 	def getStory(id) {
+
 		return [
-			[facebook_id:"1", user_id:"2", name:"juancito",text:"texto1"],
-			[facebook_id:"2", user_id:"3", name:"juancito",text:"texto1"],
-			[facebook_id:"3", user_id:"4", name:"juancito",text:"texto1"],
-			[facebook_id:"4", user_id:"5", name:"juancito",text:"texto1"]
+			id:1,
+			name:"another one bites the dust",
+			author:"3",
+			authorName:"juanitoull",
+			paragraphs:[
+				[facebook_id:"1", user_id:"2", name:"juancito",text:"texto1"],
+				[facebook_id:"2", user_id:"3", name:"juancito",text:"texto1"],
+				[facebook_id:"3", user_id:"4", name:"juancito",text:"texto1"],
+				[facebook_id:"4", user_id:"5", name:"juancito",text:"texto1"]
 
-		]
+			]
+			]
+
 	}
 
-	def getCompleteStory(paragraph) {
-		def root = getRootParagraph(paragraph)
-		if (isFinished)
-		println "caca"
+	def getCompleteStory(storyId, userId) {
+		//check if there is a paragraph from the user in the story
+		Random rand = new Random()
+
+
+		def story = Story.get(storyId)
+		if (isFinished(story))
+		println "historia terminada"
 		else
-		throw new RuntimeException("Story is not finished yet")
+		println "no terminada"
+
+		def userParagraph
+		if (userId)
+		userParagraph = Paragraph.findByAuthorAndStoryId(userId, storyId)
+
+		def actualStory = [id:story.id, name:story.name, author:story.author, authorName :story.authorName, paragraphs:[]]
+		def actualParagraph
+		if (userParagraph) {
+			actualParagraph = userParagraph.parent;
+			while (actualParagraph != null) {
+				actualStory.paragraphs = [actualParagraph] + actualStory.paragraphs
+				actualParagraph = actualParagraph.parent
+			}
+			actualParagraph = userParagraph
+		} else
+		actualParagraph = story.rootParagraph
+
+		actualStory.paragraphs << actualParagraph
+		while (actualParagraph.children?.size() != 0) {
+			def option = rand.nextInt(actualParagraph.children.size())
+			actualParagraph = actualParagraph.children.getat(option)
+			actualStory.paragraphs << actualParagraph
+		}
+
+		return actualStory
 	}
+	
+	
 	def getRootParagraph(paragraph) {
 		def parent = paragraph.parent
 		while (parent != null) {
@@ -70,13 +131,13 @@ class StoriesService {
 		return paragraph
 	}
 
-	private boolean isFinished(rootParagraph) {
-		def pending = [rootParagraph]
+	private boolean isFinished(story) {
+		def pending = [story.rootParagraph]
 		def isFinished = true
-		while (isFinished && ! pending.empty()) {
+		while (isFinished &&  pending.size()!= 0) {
 			def p = pending.pop()
 			if (p.leftSteps != 0) {
-				if  (!p.children.empty()) {
+				if  (p.children?.size() != 0) {
 					p.children.each {
 						openBranches.push(it)
 					}
@@ -86,34 +147,3 @@ class StoriesService {
 		return isFinished
 	}
 }
-/*para optimizar despues
- boolean finished = false
- Exception anyException = null
- withPool(100) {pool ->
- runForkJoin(null) { paragraph ->
- def children
- if (paragraph == null) {
- children = [rootParagraph]
- } else {
- try {
- def category = getCategory(categoryId, siteId)
- log.debug "Fetched category $category.id"
- def json = new JSONObject(category).toString()
- if (!firstWrite) {
- writer.write(',')
- }
- writer.write("\"$category.id\":$json")
- firstWrite = false
- writer.flush()
- children = category.children_categories.collect {it.id}
- } catch (Exception e) {
- anyException = e
- throw e
- }
- }
- children.each {
- forkOffChild(it)       //fork a child task
- }
- }
- }
- */

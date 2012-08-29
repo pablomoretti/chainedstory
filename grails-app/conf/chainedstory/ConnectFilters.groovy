@@ -64,7 +64,7 @@ class ConnectFilters {
 					}
 				}
 
-				println request.getAttribute("facebook")
+			//	println request.getAttribute("facebook")
 			}
 			after = { Map model ->
 			}
