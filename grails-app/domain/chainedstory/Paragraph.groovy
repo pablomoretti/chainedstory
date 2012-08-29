@@ -12,6 +12,6 @@ class Paragraph {
     static hasMany = [children: Paragraph]
 	static constraints = {
 		parent nullable:true
-		
+		children nullable:true
     }
 }
