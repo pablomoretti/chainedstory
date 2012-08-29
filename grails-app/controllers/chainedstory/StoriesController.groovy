@@ -6,4 +6,13 @@ class StoriesController {
 		
 	
 	}
+	
+	def add(){
+		println "save ${params.paragraph}"
+		redirect(action:congrats)
+	}
+	
+	def congrats(){
+		
+	}
 }

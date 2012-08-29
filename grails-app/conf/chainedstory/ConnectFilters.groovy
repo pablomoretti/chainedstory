@@ -17,7 +17,7 @@ class ConnectFilters {
 
 	def filters = {
 
-		all(controller:'story', action:'*') {
+		all(controller:'ho', action:'*') {
 
 			before = {
 
