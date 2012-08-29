@@ -1,0 +1,290 @@
+﻿body {
+	background: #f7f5f5 url("../assets/wood_texture.png") repeat;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 1);
+	color: #524D4D;
+	max-width: none;
+	min-width: 0;
+	padding: 0;
+	font-size: 14px;
+	line-height: 1.231em;
+	font-family: "Helvetica Neue", Helvetica, Arial, "MS Trebuchet", sans-serif;
+}
+
+img {
+	max-width: 100%;
+}
+
+/* Arial Headers*/
+h1 {
+	font-size: 1.714em; /* 24 */
+}
+
+h2 {
+	font-size: 1.571em; /* 22 */
+}
+
+h3 {
+	font-size: 1.429em; /* 20 */
+}
+
+h4 {
+	font-size: 1.286em; /* 18 */
+}
+
+h5 {
+	font-size: 1.143em; /* 16 */
+}
+
+h6 {
+	font-size: 1em; /* 14 */
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: bold;
+	line-height: 1.25em;
+	margin: 0 0 10px;
+}
+
+/* Colors */
+.ch-btn,
+.ch-btn:focus,
+.ch-btn:visited,
+.ch-btn:active {
+	background-color: #F1F1F1;
+	background-image: -webkit-linear-gradient(#F1F1F1, #E6E6E6);
+	background-image: -moz-linear-gradient(#F1F1F1, #E6E6E6);
+	background-image: -o-linear-gradient(#F1F1F1, #E6E6E6);
+	background-image: linear-gradient(#F1F1F1, #E6E6E6);
+	-webkit-box-shadow: inset 0 1px 1px #ffffff;
+	box-shadow: inset 0 1px 1px #ffffff;
+	border: 1px solid #CCCCCC;
+	border-bottom-color: #BBBBBB;
+	color: #333;
+	text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.lt-ie10 .ch-btn,
+.lt-ie10 .ch-btn:focus,
+.lt-ie10 .ch-btn:visited,
+.lt-ie10 .ch-btn:active {
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#F1F1F1', endColorstr='#E6E6E6');
+}
+
+.ch-btn-skin,
+.ch-btn-skin:focus,
+.ch-btn-skin:visited,
+.ch-btn-skin:active {
+	background-color: #FB2B5E;
+	background-image: -webkit-linear-gradient(#FB2B5E, #E40A52);
+	background-image: -moz-linear-gradient(#FB2B5E, #E40A52);
+	background-image: -o-linear-gradient(#FB2B5E, #E40A52);
+	background-image: linear-gradient(#FB2B5E, #E40A52);
+	border: 1px solid #B30841;
+	-webkit-box-shadow: inset 0 1px 1px rgba(255, 255, 255, .5);
+	box-shadow: inset 0 1px 1px rgba(255, 255, 255, .5);
+	color: #FFFFFF;
+	text-shadow: 0 -1px 0 rgba(100, 100, 100, .5);
+}
+
+.lt-ie10 .ch-btn-skin,
+.lt-ie10 .ch-btn-skin:focus,
+.lt-ie10 .ch-btn-skin:visited,
+.lt-ie10 .ch-btn-skin:active {
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FB2B5E', endColorstr='#E40A52');
+}
+
+
+/* Hover */
+.ch-btn:hover,
+.ch-btn-skin:hover {
+	text-decoration: none;
+}
+
+/* Colors on Hover */
+.ch-btn:hover {
+	background-color: #FFFFFF;
+	background-image: -webkit-linear-gradient(#FFFFFF, #EEEEEE);
+	background-image: -moz-linear-gradient(#FFFFFF, #EEEEEE);
+	background-image: -o-linear-gradient(#FFFFFF, #EEEEEE);
+	background-image: linear-gradient(#FFFFFF, #EEEEEE);
+}
+
+.lt-ie10 .ch-btn:hover {
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#EEEEEE');
+}
+
+.ch-btn-skin:hover {
+	background-color: #FF2D62;
+	background-image: -webkit-linear-gradient(#FF2D62, #FF0E60);
+	background-image: -moz-linear-gradient(#FF2D62, #FF0E60);
+	background-image: -o-linear-gradient(#FF2D62, #FF0E60);
+	background-image: linear-gradient(#FF2D62, #FF0E60);
+}
+
+.lt-ie10 .ch-btn-skin:hover {
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF2D62', endColorstr='#FF0E60');
+}
+
+/* Colors on Active */
+.ch-btn:active {
+	-webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.lt-ie10 .ch-btn:active {
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#D9D9D9', endColorstr='#f9f9f9');
+}
+
+.ch-btn-skin:active {
+	-webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.lt-ie10 .ch-btn-skin:active {
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#C80041', endColorstr='#FF0E60');
+}
+
+
+/*
+* Boxes
+*/
+.ch-box-container,
+.ch-box-lite,
+.ch-box {
+	background-color: #FFFFFF;
+}
+
+.ch-box-lite,
+.ch-box {
+	border: none;
+	-wekit-border-radius: 5px 5px 0 0;
+	border-radius: 5px 5px 0 0;
+	-webkit-box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+	box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+}
+
+.ch-box,
+.cs-link-new {
+	background: #ffffff url("../assets/linebottom.png") repeat-x left bottom;
+	padding-bottom: 20px;
+}
+
+.cs-link-view {
+	width: 500px;
+	margin: 0 auto;
+	padding: 10px;
+}
+
+.cs-link-view textarea,
+.cs-link-view textarea:focus {
+	border: none;
+	box-shadow: none;
+	padding: 0;
+	margin: 0;
+}
+
+.cs-link-view textarea {
+	font-size: 1.2em;
+}
+
+/*
+* Messages Boxes
+*/
+.ch-box-attention:before,
+.ch-box-help:before,
+.ch-box-information:before,
+.ch-box-error:before,
+.ch-box-ok:before {
+	top: 10px;
+}
+
+.ch-box-attention,
+.ch-box-attention:before {
+	background-color: #FCF8E3;
+	border-color: #FBEED5;
+	color: #C09853;
+}
+
+.ch-box-error {
+	background-color: #F2DEDE;
+	border-color: #EED3D7;
+	color: #B94A48;
+}
+
+.ch-box-help,
+.ch-box-help:before {
+	background-color: #F6F9F3;
+	border-color: #dddddd;
+	color: #999;
+}
+
+.ch-box-information,
+.ch-box-information:before {
+	background-color: #D9EDF7;
+	border-color: #BCE8F1;
+	color: #3A87AD;
+}
+
+.ch-box-ok,
+.ch-box-ok:before {
+	background-color: #DFF0D8;
+	border-color: #D6E9C6;
+	color: #468847;
+}
+
+
+/*
+* Pagination
+*/
+.ch-pagination {
+	margin: 20px 0 40px;
+}
+
+.ch-pagination li a,
+.ch-pagination li.ch-pagination-current a,
+.ch-pagination li:first-child a,
+.ch-pagination li:last-child a {
+	border-color: #CCC;
+	background-color: #FFF;
+}
+
+.ch-pagination li a:hover {
+	color: #D50437;
+	background-color: #ECECEC;
+	border-color: #CCC;
+}
+
+.ch-pagination li.ch-pagination-current a {
+	background-color: #E40A52;
+	color: #FFFFFF;
+	text-shadow: 0 -1px 0 rgba(100, 100, 100, .5);
+}
+
+.ch-pagination li:first-child a:hover,
+.ch-pagination li:last-child a:hover {
+	border-color: #CCCCCC;
+}
+
+/**/
+
+.cs-header,
+.cs-footer {
+	background: #F9F9F9;
+}
+
+.cs-header {
+
+}
+
+.cs-logo {
+	font-family: "Lobster Two", cursive;
+	font-size: 2.5em;
+	line-height: 4.2em;
+	font-weight: bold;
+	font-style: italic;
+	text-align: center;
+}
+
+.ch-logo a {
+	color: #333;
+}
