@@ -17,5 +17,14 @@
 	<body>
 		<g:layoutBody/>
         <r:layoutResources />
+
+        <script src="${resource(dir: 'js', file: 'jquery.js')}"></script>
+        <script src="${resource(dir: 'js', file: 'chico-min-0.11.js')}"></script>
+		<script>
+			if ($("#paragraph").length > 0) {
+				$("#paragraph").countdown(512);
+			}
+		</script>
+        </script>
 	</body>
 </html>

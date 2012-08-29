@@ -34,14 +34,14 @@
 						<img src="https://graph.facebook.com/${request.getAttribute('facebook')?.user_id}/picture?type=square" width="50" height="50">
 					</a>
 					<div class="sc-bd">
-						<p><a href="https://www.facebook.com/${request.getAttribute('facebook')?.user_id}">Me</a> writes:</p>
+						<p><a href="https://www.facebook.com/${request.getAttribute('facebook')?.user_id}">Me</a>:</p>
 						<div class="ch-form-row">
-							<textarea placeholder="Write a new paragraph, fold and share..." name="paragraph" maxlength="512"></textarea>
+							<textarea placeholder="Write a new paragraph, fold and share..." id="paragraph" name="paragraph" maxlength="512"></textarea>
 						</div>
 					</div>
 				</div>
 				<p class="ch-form-actions">
-					<input type="submit" name="fold" value="Fold and share" class="ch-btn" />
+					<input type="submit" name="fold" value="Fold" class="ch-btn" />
 				</p>
 			</form>
 		</section>

@@ -231,7 +231,7 @@ hr {
 .cs-message-ok {
 	max-width: 650px;
 	margin: 0 auto;
-	padding-bottom: 12px;
+	padding-bottom: 5px;
 }
 
 .cs-link-view {
@@ -274,6 +274,10 @@ hr {
 
 .cs-link-view .ch-form {
 	padding: 10px;
+}
+
+.cs-link-view .ch-form-hint {
+	margin: 5px 0 0 10px;
 }
 
 .cs-link-view legend{
