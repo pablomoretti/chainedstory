@@ -11,11 +11,15 @@
 		</header>
 		<section class="cs-link-view">
 			<header>
-				<h2>Create a new chained story...</h2>
+				<h2>Write a new paragrph...</h2>
 			</header>
+			<div class="cs-paragraph">
+				<p>Pablo Morreti wrote:</p>
+				<cite>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing.</cite>
+			</div>
 			<form action="/stories/add" class="ch-form" method="post">
 				<div class="ch-form-row">
-					<textarea placeholder="Start an awesome story with your friends..." name="paragraph"></textarea>
+					<textarea placeholder="Write a new paragraph, fold and share..." name="paragraph" maxlength="512"></textarea>
 				</div>
 				<p class="ch-form-actions">
 					<input type="submit" name="fold" value="Fold and share" class="ch-btn" />
