@@ -1,8 +1,13 @@
 <!doctype html>
 <html>
-	<head>
+	<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# chainedstory-dev: http://ogp.me/ns/fb/chainedstory-dev#">
+		<meta property="fb:app_id" content="222415064551176" /> 
+		<meta property="og:type"   content="chainedstory-dev:paragraph" /> 
+		<meta property="og:url"    content="${commons.currentUrl()}" /> 
+		<meta property="og:title"  content="Paragraph of ${paragraph.author}" /> 
+		<meta property="og:image"  content="https://s-static.ak.fbcdn.net/images/devsite/attachment_blank.png" /> 
 		<meta name="layout" content="default"/>
-		<title>Chainedstory</title>
+		<title>Paragraph of ${paragraph.author}</title>
 		<meta name="description" content="Chainedstory"/>
 	</head>
 	<body>

@@ -17,8 +17,6 @@ class StoriesController {
 	}
 	
 	def paragraph(){
-		
-		
-	
+		return ['paragraph':Paragraph.findById(params.id)]
 	}
 }
