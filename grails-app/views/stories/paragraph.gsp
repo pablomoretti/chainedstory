@@ -11,17 +11,16 @@
 		<meta name="description" content="Chainedstory"/>
 	</head>
 	<body>
-
 		<header class="cs-header">
 			<h1 class="cs-logo">Chainedstory</h1>
 		</header>
 		<section class="cs-link-view">
 			<article class="cs-paragraph">
-				<div class="sc-media">
-					<a href="https://www.facebook.com/${paragraph.author}" class="sc-img">
+				<div class="cs-media">
+					<a href="https://www.facebook.com/${paragraph.author}" class="cs-img">
 						<img src="https://graph.facebook.com/${paragraph.author}/picture?type=square" width="50" height="50">
 					</a>
-					<div class="sc-bd">
+					<div class="cs-bd">
 						<p><a href="https://www.facebook.com/${paragraph.author}">${paragraph.author}</a> wrote:</p>
 						<blockquote>${paragraph.content}</blockquote>
 					</div>
@@ -29,11 +28,11 @@
 			</article>
 			<hr>
 			<form action="/stories/add" class="ch-form" method="post">
-				<div class="sc-media">
-					<a href="https://www.facebook.com/${request.getAttribute('facebook')?.user_id}" class="sc-img">
+				<div class="cs-media">
+					<a href="https://www.facebook.com/${request.getAttribute('facebook')?.user_id}" class="cs-img">
 						<img src="https://graph.facebook.com/${request.getAttribute('facebook')?.user_id}/picture?type=square" width="50" height="50">
 					</a>
-					<div class="sc-bd">
+					<div class="cs-bd">
 						<p><a href="https://www.facebook.com/${request.getAttribute('facebook')?.user_id}">Me</a>:</p>
 						<div class="ch-form-row">
 							<textarea placeholder="Write a new paragraph, fold and share..." id="paragraph" name="paragraph" maxlength="512"></textarea>

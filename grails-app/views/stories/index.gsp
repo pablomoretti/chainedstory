@@ -11,11 +11,11 @@
 		</header>
 		<section class="cs-link-view">
 			<form action="/stories/add" class="ch-form" method="post">
-				<div class="sc-media">
-					<a href="https://www.facebook.com/${request.getAttribute('facebook')?.user_id}" class="sc-img">
+				<div class="cs-media">
+					<a href="https://www.facebook.com/${request.getAttribute('facebook')?.user_id}" class="cs-img">
 						<img src="https://graph.facebook.com/${request.getAttribute('facebook')?.user_id}/picture?type=square" width="50" height="50">
 					</a>
-					<div class="sc-bd">
+					<div class="cs-bd">
 						<p><a href="https://www.facebook.com/${request.getAttribute('facebook')?.user_id}">Me</a>:</p>
 						<div class="ch-form-row">
 							<textarea placeholder="Start an awesome story with your friends..." name="paragraph" id="paragraph" maxlength="512"></textarea>

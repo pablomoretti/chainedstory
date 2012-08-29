@@ -212,8 +212,7 @@ h1, h2, h3, h4, h5, h6 {
 /**/
 
 hr {
-	width: 90%;
-	color: #f9f9f9;
+	color: #EEE;
 	margin-top: 20px;
 }
 
@@ -297,22 +296,32 @@ hr {
 }
 
 /*USER*/
-.sc-media {
+.cs-media {
 	overflow: hidden;
 }
 
-.sc-media .sc-img {
+.cs-media .cs-img {
 	float: left;
 	margin-right: 10px;
 }
 
-.sc-media .sc-img img {
+.cs-media .cs-img img {
 	display: block;
 	margin: 0 auto;
 	border-radius: 3px;
 }
 
-.sc-media .sc-bd {
+.cs-media .cs-bd {
 	line-height: 14px;
 	padding-left: 50px;
+}
+
+/*Story Full*/
+.cs-story-full {
+	margin: 0 0 20px;
+}
+
+.cs-story-full li {
+	border-bottom: 1px dashed #EEE;
+	padding-bottom: 15px;
 }
