@@ -240,6 +240,9 @@ hr {
 
 .cs-message-ok {
 	text-align: center;
+	line-height: 4em;
+	padding: 0;
+	padding-top: 12px;
 }
 
 .cs-link-view header {

@@ -12,7 +12,7 @@
 		<section class="cs-link-view">
 			<div class="cs-message-ok">
 				<i class="ch-icon-ok-sign"></i>
-				<span>Everything is great!</span>
+				<span>Your paragraph was saved!</span>
 			<div>
 		</section>
 	</body>
