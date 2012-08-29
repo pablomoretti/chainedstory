@@ -24,7 +24,7 @@ class StoriesService {
 			url = "http://www.chainedstory.com/stories/paragraph/" + theParagraph
 		}
 
-		def resp = JSON.parse(new URL(getActionUrl(url, parameters.content,oauthToken)).text);
+		def resp = JSON.parse(new URL(getActionUrl(url, parameters.content,parameters.oauthToken)).text);
 		theParagraph.facebookId = resp.id
 		theParagraph.save()
 		println theParagraph.properties.toString()
