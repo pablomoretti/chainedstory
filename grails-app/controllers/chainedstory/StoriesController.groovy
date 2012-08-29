@@ -1,7 +1,8 @@
 package chainedstory
 
 class StoriesController {
-
+	def storiesService
+	
     def index() { 
 		
 	
@@ -9,7 +10,15 @@ class StoriesController {
 	
 	def add(){
 		println "save ${params.paragraph}"
-		redirect(action:congrats)
+		def newStory = storiesService.addStory(author:"yo", content:params.paragraph)
+		redirect(action:"congrats", params:[id:newStory])
+	}
+	
+	def getStory() {
+		println "want to get story ${params.storyId}"
+		def sampleStory = [
+				[author:"juancito"]
+			]
 	}
 	
 	def congrats(){

@@ -5,7 +5,9 @@ class ParagraphsController {
     def index() { 
 		render " saraza"
 		}
+	def congrats() {
 	
+	}
 	def write () {
 		//write a new paragraph
 		def parent = params.parent_paragraph
