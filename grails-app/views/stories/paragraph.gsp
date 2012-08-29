@@ -11,13 +11,14 @@
 		<meta name="description" content="Chainedstory"/>
 	</head>
 	<body>
+	
 		<header class="cs-header">
 			<h1 class="cs-logo">Chainedstory</h1>
 		</header>
 		<section class="cs-link-view">
 			<div class="cs-paragraph">
-				<span>Pablo Morreti wrote:</span>
-				<blockquote>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing.</blockquote>
+				<span><img src="https://graph.facebook.com/${paragraph.author}/picture?type=square" > ${paragraph.author} wrote:</span>
+				<blockquote>${paragraph.content}</blockquote>
 			</div>
 			<hr>
 			<form action="/stories/add" class="ch-form" method="post">
