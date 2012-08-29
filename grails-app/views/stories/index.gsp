@@ -15,11 +15,8 @@
 					<a href="https://www.facebook.com/${request.getAttribute('facebook')?.user_id}" class="cs-img">
 						<img src="https://graph.facebook.com/${request.getAttribute('facebook')?.user_id}/picture?type=square" width="50" height="50">
 					</a>
-					<div class="cs-bd">
-						<p><a href="https://www.facebook.com/${request.getAttribute('facebook')?.user_id}">Me</a>:</p>
-						<div class="ch-form-row">
-							<textarea placeholder="Start an awesome story with your friends..." name="paragraph" id="paragraph" maxlength="512"></textarea>
-						</div>
+					<div class="cs-bd ch-form-row">
+						<textarea required placeholder="Start an awesome story with your friends..." name="paragraph" id="paragraph" maxlength="512"></textarea>
 					</div>
 				</div>
 				<p class="ch-form-actions">
