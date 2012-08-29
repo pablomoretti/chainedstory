@@ -40,7 +40,7 @@ class ConnectFilters {
 
 						facebookUser = (Map) JSON.parse(new String( base64UrlDecode(split[1])));
 
-						if(!envelope['user_id']){
+						if(!facebookUser['user_id']){
 							redirect(controller:'oauth')
 							return true
 						}
