@@ -7,9 +7,7 @@
 	</head>
 	<body>
 		<header class="cs-header">
-			<h1 class="cs-logo">
-				<a href="#">chainedstory</a>
-			</h1>
+			<h1 class="cs-logo">Chainedstory</h1>
 		</header>
 		<section class="cs-link-view">
 			<header>
@@ -20,7 +18,7 @@
 					<textarea placeholder="Start an awesome story with your friends..." name="paragraph"></textarea>
 				</div>
 				<p class="ch-form-actions">
-					<input type="submit" name="fold" value="Create" class="ch-btn" />
+					<input type="submit" name="fold" value="Create and share" class="ch-btn" />
 				</p>
 			</form>
 		</section>
