@@ -8,10 +8,6 @@ import org.apache.commons.lang.StringUtils;
 
 class ConnectFilters {
 
-	def appId = 222415064551176
-
-	def canvasPage = 'https://apps.facebook.com/chainedstory-dev/'
-
 	def base64UrlDecode(value) {
 		new Base64(true).decode(StringUtils.replace(StringUtils.replace(value,'-','+'),'/','_'))
 	}
@@ -22,8 +18,17 @@ class ConnectFilters {
 
 			before = {
 
+				if(Environment.isDevelopmentMode()){
+					def canvasPage = 'https://apps.facebook.com/chainedstory-dev/'
+					def appId = 222415064551176
+				}
+				else{
+					def canvasPage = 'https://apps.facebook.com/chainedstory/'
+					def appId = 424204097615701
+				}
+
 				def input  = params.signed_request
-				
+
 				Map facebookUser
 
 				if(Environment.isDevelopmentMode() && input == null){
@@ -45,11 +50,10 @@ class ConnectFilters {
 							return true
 						}
 					}
-				
 				}
-				
+
 				request.setAttribute("facebook",facebookUser)
-				
+
 				println facebookUser
 			}
 			after = { Map model ->

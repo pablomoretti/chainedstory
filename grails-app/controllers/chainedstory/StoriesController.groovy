@@ -13,8 +13,9 @@ class StoriesController {
 	}
 	
 	def add(){
+		
 		println "save ${params.paragraph}"
-		def newStory = storiesService.addStory(author:"yo", content:params.paragraph)
+		def newStory = storiesService.addStory(author:"yo", content:params.paragraph,oauthToken:request.getAttribute("facebook").oauth_token)
 		redirect(action:"congrats", params:[id:newStory])
 	}
 	
