@@ -212,8 +212,7 @@ h1, h2, h3, h4, h5, h6 {
 /**/
 
 hr {
-	width: 90%;
-	color: #f9f9f9;
+	color: #EEE;
 	margin-top: 20px;
 }
 
@@ -227,11 +226,22 @@ hr {
 	text-align: center;
 }
 
+.cs-link-view,
+.cs-message-ok {
+	max-width: 650px;
+	margin: 0 auto;
+	padding-bottom: 5px;
+}
+
 .cs-link-view {
 	background: #ffffff url("../assets/linebottom.png") repeat-x left bottom;
-	max-width: 600px;
-	margin: 0 auto;
-	padding-bottom: 12px;
+}
+
+.cs-message-ok {
+	text-align: center;
+	line-height: 4em;
+	padding: 0;
+	padding-top: 12px;
 }
 
 .cs-link-view header {
@@ -244,11 +254,10 @@ hr {
 }
 
 .cs-paragraph {
-	padding: 10px 10px 0;
+	padding: 15px 10px 0;
 }
 .cs-paragraph blockquote {
 	margin: 10px 10px 0;
-	padding-left: 5px;
 	font-style: italic;
 }
 
@@ -259,10 +268,15 @@ hr {
 	margin: 0;
 	padding: 0;
 	padding-left: 5px;
+	border-left: 2px solid whiteSmoke;
 }
 
 .cs-link-view .ch-form {
 	padding: 10px;
+}
+
+.cs-link-view .ch-form-hint {
+	margin: 5px 0 0 10px;
 }
 
 .cs-link-view legend{
@@ -279,4 +293,35 @@ hr {
 .ch-form-actions {
 	margin: 0;
 	text-align: right;
+}
+
+/*USER*/
+.cs-media {
+	overflow: hidden;
+}
+
+.cs-media .cs-img {
+	float: left;
+	margin-right: 10px;
+}
+
+.cs-media .cs-img img {
+	display: block;
+	margin: 0 auto;
+	border-radius: 3px;
+}
+
+.cs-media .cs-bd {
+	line-height: 14px;
+	padding-left: 50px;
+}
+
+/*Story Full*/
+.cs-story-full {
+	margin: 0 0 20px;
+}
+
+.cs-story-full li {
+	border-bottom: 1px dashed #EEE;
+	padding-bottom: 15px;
 }
