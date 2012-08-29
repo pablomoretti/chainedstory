@@ -4,8 +4,8 @@
 		<meta property="fb:app_id" content="424204097615701" />
 		<meta property="og:type"   content="chainedstory:paragraph" />
 		<meta property="og:url"    content="${commons.currentUrl()}" />
-		<meta property="og:title"  content="Paragraph of ${paragraph.author}" />
-		<meta property="og:image"  content="https://s-static.ak.fbcdn.net/images/devsite/attachment_blank.png" />
+		<meta property="og:title"  content="Paragraph of ${paragraph?.authorName}" />
+		<meta property="og:image"  content="https://www.unionbank.com/Images/2_0PB_MarketLinkedCDs_ChainIcon.gif" />
 		<meta name="layout" content="default"/>
 		<title>Paragraph of ${paragraph.author}</title>
 		<meta name="description" content="Chainedstory"/>
