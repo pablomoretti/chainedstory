@@ -13,10 +13,11 @@ class StoriesController {
 	}
 	
 	def add(){
+		
 		println "save ${params.paragraph}"
-		println request.facebook
-		def newStory = storiesService.addStory(author:request.facebook?:"1466346255", content:params.paragraph, access_token:"AAADKSQrqTwgBAGItLVDIkmwKuHUQXVxDjsGZCB3xTYjAozqNS2zoQGzOSQdCVFSDqA5b8W73DxBeEaF0AKsZCchWBGLVLW7PGZAIPKlnI75FVYZCad9b")
+		def newStory = storiesService.addStory(author:request.getAttribute("facebook").user_id, content:params.paragraph,oauthToken:request.getAttribute("facebook").oauth_token)
 		redirect(action:"congrats", params:[id:newStory])
+		
 	}
 	
 	def view() {
