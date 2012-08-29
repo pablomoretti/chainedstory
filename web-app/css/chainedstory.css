@@ -163,30 +163,6 @@ h1, h2, h3, h4, h5, h6 {
 	box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
 }
 
-.ch-box,
-.cs-link-new {
-	background: #ffffff url("../assets/linebottom.png") repeat-x left bottom;
-	padding-bottom: 20px;
-}
-
-.cs-link-view {
-	width: 500px;
-	margin: 0 auto;
-	padding: 10px;
-}
-
-.cs-link-view textarea,
-.cs-link-view textarea:focus {
-	border: none;
-	box-shadow: none;
-	padding: 0;
-	margin: 0;
-}
-
-.cs-link-view textarea {
-	font-size: 1.2em;
-}
-
 /*
 * Messages Boxes
 */
@@ -233,58 +209,39 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-/*
-* Pagination
-*/
-.ch-pagination {
-	margin: 20px 0 40px;
-}
-
-.ch-pagination li a,
-.ch-pagination li.ch-pagination-current a,
-.ch-pagination li:first-child a,
-.ch-pagination li:last-child a {
-	border-color: #CCC;
-	background-color: #FFF;
-}
-
-.ch-pagination li a:hover {
-	color: #D50437;
-	background-color: #ECECEC;
-	border-color: #CCC;
-}
-
-.ch-pagination li.ch-pagination-current a {
-	background-color: #E40A52;
-	color: #FFFFFF;
-	text-shadow: 0 -1px 0 rgba(100, 100, 100, .5);
-}
-
-.ch-pagination li:first-child a:hover,
-.ch-pagination li:last-child a:hover {
-	border-color: #CCCCCC;
-}
-
 /**/
-
-.cs-header,
-.cs-footer {
-	background: #F9F9F9;
-}
-
-.cs-header {
-
-}
-
 .cs-logo {
+	color: #C3AA8F;
 	font-family: "Lobster Two", cursive;
-	font-size: 2.5em;
-	line-height: 4.2em;
+	font-size: 4.5em;
+	line-height: 2.2em;
 	font-weight: bold;
 	font-style: italic;
 	text-align: center;
 }
 
-.ch-logo a {
-	color: #333;
+.cs-link-view {
+	background: #ffffff url("../assets/linebottom.png") repeat-x left bottom;
+	padding-bottom: 20px;
+	width: 600px;
+	margin: 0 auto;
+	padding: 10px;
+	border-radius: 5px 5px 0 0;
+}
+
+.cs-link-view textarea,
+.cs-link-view textarea:focus {
+	border: none;
+	box-shadow: none;
+	padding: 0;
+	margin: 0;
+}
+
+.cs-link-view textarea {
+	font-size: 1em;
+}
+
+.ch-form-actions {
+	margin: 0;
+	text-align: right;
 }
