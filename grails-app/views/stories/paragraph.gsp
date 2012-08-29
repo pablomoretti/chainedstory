@@ -17,12 +17,12 @@
 		</header>
 		<section class="cs-link-view">
 			<div class="cs-paragraph">
-				<span><img src="https://graph.facebook.com/${paragraph.author}/picture?type=square" > ${paragraph.author} wrote:</span>
+				<span><a href=" https://www.facebook.com/${paragraph.author}" ><img src="https://graph.facebook.com/${paragraph.author}/picture?type=square" ></a> <a href=" https://www.facebook.com/${paragraph.author}" >${paragraph.author}</a> wrote:</span>
 				<blockquote>${paragraph.content}</blockquote>
 			</div>
 			<hr>
 			<form action="/stories/add" class="ch-form" method="post">
-				<legend>Me:</legend>
+				<legend><a href=" https://www.facebook.com/${request.getAttribute('facebook')?.user_id}" ><img src="https://graph.facebook.com/${request.getAttribute('facebook')?.user_id}/picture?type=square" ></a> <a href=" https://www.facebook.com/${request.getAttribute('facebook')?.user_id}" >Me:</a></legend>
 				<div class="ch-form-row">
 					<textarea placeholder="Write a new paragraph, fold and share..." name="paragraph" maxlength="512"></textarea>
 				</div>
