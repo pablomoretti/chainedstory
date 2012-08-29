@@ -1,12 +1,20 @@
 package chainedstory
 
 import grails.converters.JSON
-import grails.util.Environment;
+import grails.util.Environment
+
+import javax.servlet.http.HttpServletRequest
 
 import org.apache.commons.codec.binary.Base64
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.StringUtils
 
 class ConnectFilters {
+
+	static DB_USER_AGENT = "facebookexternalhit"
+
+	private boolean isFacebookExternalHit(HttpServletRequest request){
+		request.getHeader("User-Agent")?.indexOf(DB_USER_AGENT) != -1
+	}
 
 	def base64UrlDecode(value) {
 		new Base64(true).decode(StringUtils.replace(StringUtils.replace(value,'-','+'),'/','_'))
@@ -18,53 +26,57 @@ class ConnectFilters {
 
 			before = {
 
-				def canvasPage = 'https://apps.facebook.com/chainedstory/'
-				def appId = 424204097615701
+				if(!isFacebookExternalHit(request)){
 
-				if(Environment.isDevelopmentMode()){
-					canvasPage = 'https://apps.facebook.com/chainedstory-dev/'
-					appId = 222415064551176
-				}
+					def canvasPage = 'https://apps.facebook.com/chainedstory/'
+					def appId = 424204097615701
 
-				if(session.facebookUser){
-					request.setAttribute("facebook",session.facebookUser)
-				}else{
-
-					Map facebookUser
-
-					def auth_url = "https://www.facebook.com/dialog/oauth?client_id=${appId}&redirect_uri=${canvasPage.encodeAsURL()}"
-
-					def input  = params.signed_request
-
-					StringBuilder sb = new StringBuilder()
-
-					sb << request.getAttribute("javax.servlet.forward.request_uri")
-
-					if(request.getAttribute("javax.servlet.forward.query_string")){
-						sb << request.getAttribute("javax.servlet.forward.query_string")
+					if(Environment.isDevelopmentMode()){
+						canvasPage = 'https://apps.facebook.com/chainedstory-dev/'
+						appId = 222415064551176
 					}
-					
 
-					if(!input){
-						redirect(uri:canvasPage + StringUtils.replaceOnce(sb.toString(), "/", ""))
-						return true
+					if(session.facebookUser){
+						request.setAttribute("facebook",session.facebookUser)
 					}else{
-						String[] split = input.split("[.]", 2);
 
-						facebookUser = (Map) JSON.parse(new String( base64UrlDecode(split[1])));
+						Map facebookUser
 
-						if(!facebookUser['user_id']){
-							redirect(controller:'oauth',params:[go:canvasPage + StringUtils.replaceOnce(sb.toString(), "/", "") ])
-							return true
+						def auth_url = "https://www.facebook.com/dialog/oauth?client_id=${appId}&redirect_uri=${canvasPage.encodeAsURL()}"
+
+						def input  = params.signed_request
+
+						StringBuilder sb = new StringBuilder()
+
+						sb << request.getAttribute("javax.servlet.forward.request_uri")
+
+						if(request.getAttribute("javax.servlet.forward.query_string")){
+							sb << request.getAttribute("javax.servlet.forward.query_string")
 						}
 
-						session.facebookUser = facebookUser
 
-						request.setAttribute("facebook",facebookUser)
+						if(!input){
+							redirect(uri:canvasPage + StringUtils.replaceOnce(sb.toString(), "/", ""))
+							return true
+						}else{
+							String[] split = input.split("[.]", 2);
+
+							facebookUser = (Map) JSON.parse(new String( base64UrlDecode(split[1])));
+
+							if(!facebookUser['user_id']){
+								redirect(controller:'oauth',params:[go:canvasPage + StringUtils.replaceOnce(sb.toString(), "/", "") ])
+								return true
+							}
+
+							session.facebookUser = facebookUser
+
+							request.setAttribute("facebook",facebookUser)
+						}
 					}
-				}
 
-			//	println request.getAttribute("facebook")
+					//	println request.getAttribute("facebook")
+
+				}
 			}
 			after = { Map model ->
 			}
