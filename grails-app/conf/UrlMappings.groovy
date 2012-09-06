@@ -6,7 +6,7 @@ class UrlMappings {
 			}
 		}
 		
-		"/"(controller:"stories")
+		"/"(view:"/index")
 		
 		"500"(view:'/error')
 	}
