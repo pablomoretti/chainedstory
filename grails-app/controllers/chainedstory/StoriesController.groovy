@@ -18,7 +18,8 @@ class StoriesController {
 	def create(){
 		if (params.paragraph_id == null) {
 			def newStory = storiesService.addNewStory(
-				author:request.session.facebook.id, 
+				author:request.session.facebook.id,
+				authorName:request.session.facebook.firstName,
 				content:params.text,
 				category: params.category,
 				oauthToken:request.session.facebook.accessToken.value,
@@ -30,6 +31,7 @@ class StoriesController {
 				paragraph:params.paragraph_id,
 				author:request.session.facebook.id,
 				content:params.text,
+				authorName:request.session.facebook.firstName,
 				oauthToken:request.session.facebook.accessToken.value)
 			redirect(action:"congrats", params:[id:newParagraph])
 		}
