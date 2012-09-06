@@ -22,7 +22,7 @@
 			<section class="cs-link-view ch-g1-3">
 				<div class="cs-story">
 					<h3 class="title">True story</h3>
-					<ul class="cs-story">
+					<ul>
 						<li>
 							<article class="cs-paragraph">
 								<div class="cs-media">
@@ -62,6 +62,9 @@
 					</ul>
 				</div>
 			</section>
+			<footer>
+				<p>ChainedStory &copy; 2012</p>
+			</footer>
 		</div>
 	</body>
 </html>

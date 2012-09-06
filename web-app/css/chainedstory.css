@@ -271,10 +271,11 @@ section.cs-link-view  {
 }
 
 footer {
-	background-color: rgba(0,0,0,.3);
-	color: #f9f9f9;
-	padding: 5px;
+	color: #F1F1F1;
+	text-shadow: 0 -1px #5E3317;
 	clear: both;
+	font-size: .8em;
+	text-align: right;
 }
 
 #facepile {
