@@ -149,7 +149,7 @@ class StoriesService {
 				url = "http://samples.ogp.me/225279600931389"
 			}
 			else{
-				url = "http://www.chainedstory.com/stories/read/" + story.id.toString()
+				url = "http://www.chainedstory.com/stories/read/" + theStory.id.toString()
 			}
 			//post new paragraph to open graph graph graph
 			def resp
@@ -166,7 +166,7 @@ class StoriesService {
 			parentParagraph.children.add( theParagraph) 
 			parentParagraph.save()
 			
-			return theParagraph.id
+			return theStory.id
 
 		}		
 	}
