@@ -10,7 +10,6 @@
 		<meta name="description" content=""/>
 	</head>
 	<body>
-
 		<header class="cs-header">
 			<h1 class="cs-logo">Chainedstory</h1>
 		</header>
@@ -31,30 +30,30 @@
 					</li>
 				</g:each>
 			</ul>
-		</section>
-		<%
-		println story.story.status
-		%>
 		<g:if test="${story.story.status != 'closed'}">
-		<hr>
-			<form action="/stories/create" class="ch-form" method="post">
-				<input type="hidden" name="paragraph_id" value="${story.paragraphs[0].id}"/>
-				<div class="cs-story">
-					<fieldset class="cs-media">
-							<label class="cs-img" for="paragraph">
-								<img src="https://graph.facebook.com/${session.facebook.id}/picture?type=square" width="50" height="50">
-							</label>
-							<div class="cs-bd ch-form-row">
-								<textarea id="paragraph" required placeholder="Start wrinting here..." name="text" maxlength="512"></textarea>
-							</div>
-					</fieldset>
-					</div>
-					<p class="ch-form-actions">
-						<span class="cs-btn-container">
-							<input type="submit" name="fold" value="Create" class="ch-btn" />
-						</span>
-					</p>
-			</form>
+			<g:if test="${session.facebook }" >
+			<hr>
+				<form action="/stories/create" class="ch-form" method="post">
+					<input type="hidden" name="paragraph_id" value="${story.paragraphs[0].id}"/>
+					<div class="cs-story">
+						<fieldset class="cs-media">
+								<label class="cs-img" for="paragraph">
+									<img src="https://graph.facebook.com/${session.facebook.id}/picture?type=square" width="50" height="50">
+								</label>
+								<div class="cs-bd ch-form-row">
+									<textarea id="paragraph" required placeholder="Wrinting here..." name="text" maxlength="512"></textarea>
+								</div>
+						</fieldset>
+						</div>
+						<p class="ch-form-actions">
+							<span class="cs-btn-container">
+								<input type="submit" name="fold" value="Add" class="ch-btn" />
+							</span>
+						</p>
+				</form>
+			</g:if>
 		</g:if>
+		</section>
+
 	</body>
 </html>

@@ -198,7 +198,6 @@ class StoriesService {
 		if (story == null)
 			throw new RuntimeException("Inexistent story")
 		def fullStory = [story:story, paragraphs:[]]
-
 		//if not finished return only open paragraphs
 		if(! isFinished(story)) {
 			def oneOpenParagraph = Paragraph.findAllByStoryAndHeightLessThan(story, story.maxSteps)
@@ -214,6 +213,9 @@ class StoriesService {
 				fullStory.paragraphs.add(oneOpenParagraph)
 				return fullStory
 			}
+		} else if (!story.status.equals("closed")){
+				story.status="closed"
+				story.save(flush:true)
 		}
 
 
