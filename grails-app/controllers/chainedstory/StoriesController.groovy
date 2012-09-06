@@ -11,10 +11,6 @@ class StoriesController {
 		request.setAttribute("facebook", [userId:1426088112])
 	}
 	
-	def create() {
-		request.setAttribute("facebook", [userId:1426088112])
-	}
-	
 	def read(){
 		[story:[id:1,name:'ss']]
 	}
@@ -26,25 +22,22 @@ class StoriesController {
 		render story as JSON
 	}
 
-	def add(){
-		start()
-		println "save ${params.paragraph}"
-		println "id requested ${params.paragraph_id}"
-
+	def create(){
 		if (params.paragraph_id == null) {
 			def newStory = storiesService.addNewStory(
-				author:request.getAttribute("facebook").userId, 
-				content:params.paragraph,
-				oauthToken:request.getAttribute("facebook").oauth_token,
-				title: params.title,
-				steps: params.steps)
+				author:request.getAttribute("facebook")?.userId?:"123", 
+				content:params.text,
+				category: params.category,
+				oauthToken:request.getAttribute("facebook")?.oauth_token,
+				title: params.name,
+				steps: params.steps?:10)
 			redirect(action:"congrats", params:[id:newStory])
 		} else {
 			def newParagraph = storiesService.addNewParagraph(
 				paragraph:params.paragraph_id,
-				author:request.getAttribute("facebook").userId, 
+				author:request.getAttribute("facebook")?.userId?:"123", 
 				content:params.paragraph,
-				oauthToken:request.getAttribute("facebook").oauth_token)
+				oauthToken:request.getAttribute("facebook")?.oauth_token)
 			redirect(action:"congrats", params:[id:newParagraph])
 		}
 	}
