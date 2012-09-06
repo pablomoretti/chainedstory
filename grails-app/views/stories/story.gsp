@@ -1,9 +1,13 @@
 <!doctype html>
 <html>
-	<head>
+	<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# chainedstory: http://ogp.me/ns/fb/chainedstory-dev#">
+		<meta property="fb:app_id" content="424204097615701" />
+		<meta property="og:type"   content="chainedstory:story" />
+		<meta property="og:url"    content="http://www.chainedstory.com/stories/read/${story.id}" />
+		<meta property="og:title"  content="${story.paragraphs[0].authorName}'s Chained Story" />
 		<meta name="layout" content="default"/>
-		<title>${story.paragraphs[0].authorName}'s chained story</title>
-		<meta name="description" content="Chainedstory"/>
+		<title>${story.paragraphs[0].authorName}'s Chained Story</title>
+		<meta name="description" content=""/>
 	</head>
 	<body>
 
