@@ -190,11 +190,12 @@ hr {
 	border-bottom: 1px solid #EEE;
 	padding-bottom: 5px;
 	color: #5E3317;
+	text-align: center;
 }
 
 .cs-link-view,
 .cs-message-ok {
-	max-width: 650px
+	max-width: 650px;
 	margin: 0 auto;
 	padding-bottom: 5px;
 }
@@ -213,9 +214,14 @@ hr {
 
 .cs-message-ok {
 	text-align: center;
-	line-height: 4em;
+	line-height: 3em;
 	padding: 0;
-	padding-top: 12px;
+	margin-top: 50px;
+	font-size: 3em;
+	color: #F1F1F1;
+	text-shadow: 0 -1px #5E3317;
+	background: rgba(0, 0, 0, .3);
+	border-radius: 6px;
 }
 
 .cs-link-view header {
@@ -227,15 +233,12 @@ hr {
 	margin: 0;
 }
 
-.cs-paragraph {
-	padding: 15px 0 0;
-}
 .cs-paragraph blockquote {
 	margin: 0px 10px 0;
 	line-height: 1.4em;
 }
 
-section.cs-link-view  {
+section.cs-link-view {
 	max-width: 689px;
 	margin: 0 auto;
 }
@@ -266,7 +269,6 @@ section.cs-link-view  {
 
 /*Story*/
 .cs-story li {
-	border-bottom: 1px dashed #EEE;
 	padding-bottom: 15px;
 }
 
