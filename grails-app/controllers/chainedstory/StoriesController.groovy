@@ -2,14 +2,20 @@ package chainedstory
 
 class StoriesController {
 
+	def requiredAuthentication = ['start']
+	
 	StoriesService storiesService
-
+	
 	def start() {
 		request.setAttribute("facebook", [userId:1426088112])
 	}
 	
 	def create() {
 		request.setAttribute("facebook", [userId:1426088112])
+	}
+	
+	def read(){
+		[story:[id:1,name:'ss']]
 	}
 
 	def index() {

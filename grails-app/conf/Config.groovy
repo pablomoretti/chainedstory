@@ -62,14 +62,31 @@ grails.exceptionresolver.params.exclude = ['password']
 // enable query caching by default
 grails.hibernate.cache.queries = true
 
+
 // set per-environment serverURL stem for creating absolute links
 environments {
     development {
         grails.logging.jul.usebridge = true
+		
+		facebook {
+			app {
+				id = 222415064551176
+				clientSecret = '0f92d6ad1bd9ce1af96fe9e5aadbc115'
+				scope = 'email,publish_actions'
+			}
+		}
+		
     }
     production {
         grails.logging.jul.usebridge = false
-        // TODO: grails.serverURL = "http://www.changeme.com"
+		
+		facebook {
+			app {
+				id = 424204097615701
+				clientSecret = '9c15361b19ad8c03dd317eaf32c0d5f3'
+				scope = 'email,publish_actions'
+			}
+		}
     }
 }
 
