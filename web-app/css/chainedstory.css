@@ -46,8 +46,8 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /*
-* Boxes
-*/
+ * Boxes
+ */
 .ch-box-container,
 .ch-box-lite,
 .ch-box {
@@ -64,8 +64,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*
-* Messages Boxes
-*/
+ * Messages Boxes
+ */
 .ch-box-attention:before,
 .ch-box-help:before,
 .ch-box-information:before,
@@ -109,7 +109,61 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-/**/
+/*
+ * Buttons
+ */
+.cs-btn-container {
+	background: rgba(0, 0, 0, .3);
+	border-radius: 6px;
+	box-shadow: 0 1px rgba(255, 255, 255, .2),0 0 6px rgba(0, 0, 0, .08) inset;
+	display: inline-block;
+	text-align: center;
+}
+
+.ch-btn,
+.ch-btn:hover,
+.ch-btn:focus,
+.ch-btn:active,
+.ch-btn:visited {
+	background: rgba(161, 19, 2, .5);
+	border-radius: 5px;
+	border-top: 1px solid transparent;
+	border-left: 1px solid transparent;
+	border-right: 1px solid rgba(0, 0, 0, .3);
+	border-bottom: 1px solid rgba(0, 0, 0, .3);
+	box-shadow: 1px 1px rgba(0, 0, 0, .2), 0 -1px rgba(255, 255, 255, .3);
+	font-weight: bold;
+	text-shadow: none;
+	color: #f5f5f5;
+	display: inline-block;
+	margin: 8px 9px 8px;
+}
+
+.ch-btn:hover,
+.ch-btn:focus {
+	background-color: #A71303;
+}
+
+.ch-btn:active {
+	background-color: #760E02;
+	border-top: 1px solid rgba(0, 0, 0, .3);
+	border-left: 1px solid rgba(0, 0, 0, .3);
+	border-right: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	box-shadow: -1px -1px rgba(0, 0, 0, .2);
+
+}
+
+.ch-btn-big,
+.ch-btn-big:focus {
+	font-size: 2em;
+	padding: 10px 20px;
+}
+
+
+/*
+ * Chained
+ */
 
 hr {
 	color: #EEE;
@@ -118,7 +172,7 @@ hr {
 
 .cs-logo {
 	font-family: "Lobster Two", cursive;
-	font-size: 4.5em;
+	font-size: 6em;
 	line-height: 1.5em;
 	font-weight: bold;
 	font-style: italic;
@@ -127,9 +181,19 @@ hr {
 	text-shadow: 0 -2px #5E3317, 0 1px rgba(255, 255, 255, .2);
 }
 
+.cs-main {
+	max-width: 1014px;
+	margin: 0 auto;
+}
+
+.cs-main h2 {
+	color: #f1f1f1;
+	text-shadow: 0 -1px #5E3317;
+}
+
 .cs-link-view,
 .cs-message-ok {
-	max-width: 650px;
+	max-width: 650px
 	margin: 0 auto;
 	padding-bottom: 5px;
 }
@@ -170,12 +234,13 @@ hr {
 	box-shadow: none;
 	margin: 0;
 	padding: 0;
-	padding-left: 5px;
-	border-left: 2px solid whiteSmoke;
+	padding: 5px;
+	border: 1px solid whiteSmoke;
 }
 
-.cs-link-view .ch-form {
-	padding: 10px;
+section.cs-link-view  {
+	max-width: 689px;
+	margin: 0 auto;
 }
 
 .cs-link-view .ch-form-hint {
@@ -194,13 +259,15 @@ hr {
 }
 
 .ch-form-actions {
-	margin: 0;
-	text-align: right;
+	margin: 20px;
+	text-align: center;
 }
 
 /*USER*/
 .cs-media {
 	overflow: hidden;
+	padding: 0 10px;
+	background: #ffffff;
 }
 
 .cs-media .cs-img {
@@ -233,99 +300,11 @@ hr {
 footer {
 	background-color: rgba(0,0,0,.3);
 	color: #f9f9f9;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	height: 100px;
+	padding: 5px;
+	clear: both;
 }
 
-
-
-/* HOME */
-.cs-link-view {
-	position: relative;
-	top: 0px;
-	left: 20px;
-}
-
-.cs-btn-container {
-	background: rgba(0, 0, 0, .3);
-	border-radius: 6px;
-	box-shadow: 0 1px rgba(255, 255, 255, .2),0 0 6px rgba(0, 0, 0, .08) inset;
-	padding: 6px;
-	display: inline-block;
-}
-
-
-.cs-main .cs-btn-container {
-	margin-left: -70px;
-	position: relative;
-	left: 50%;
-}
-
-.ch-btn,
-.ch-btn:hover,
-.ch-btn:focus,
-.ch-btn:active,
-.ch-btn:visited {
-	background: rgba(161, 19, 2, .5);
-	border-radius: 5px;
-	border-top: 1px solid transparent;
-	border-left: 1px solid transparent;
-	border-right: 1px solid rgba(0, 0, 0, .3);
-	border-bottom: 1px solid rgba(0, 0, 0, .3);
-	box-shadow: 1px 1px rgba(0, 0, 0, .2), 0 -1px rgba(255, 255, 255, .3);
-	padding: 10px 20px;
-	font-size: 2em;
-	font-weight: bold;
-	text-shadow: none;
-	color: #f5f5f5;
-	display: inline-block;
-}
-
-
-.ch-btn:hover,
-.ch-btn:focus {
-	background-color: #A71303;
-}
-
-.ch-btn:active {
-	background-color: #760E02;
-	border-top: 1px solid rgba(0, 0, 0, .3);
-	border-left: 1px solid rgba(0, 0, 0, .3);
-	border-right: 1px solid transparent;
-	border-bottom: 1px solid transparent;
-	box-shadow: -1px -1px rgba(0, 0, 0, .2);
-	padding: 10px 19px 10px 21px;
-}
-
-
-.cs-logo {
-	font-size: 10em;
-	margin-bottom: .2em;
-}
-
-.cs-main {
-	max-width: 1014px;
-	margin: 0 auto;
-}
-
-.cs-main h2 {
-	font-size: 3em;
-	color: #f1f1f1;
-	text-shadow: 0 -1px #5E3317;
-}
-
-.cs-main p {
-	color: #f1f1f1;
-	text-shadow: 0 -1px #5E3317;
-	margin: 20px 0;
-	font-size: 1.1em;
-	line-height: 1.3em;
-}
-
-.cs-main .cs-link-view {
-	-webkit-transform: rotate(3deg);
-	transform: rotate(3deg);
+#facepile {
+	width: 310px;
+	height: 70px;
 }
