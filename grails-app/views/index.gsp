@@ -15,7 +15,7 @@
 				<h2>Create a collaborative story with your friends and others.</h2>
 				<p>Chained story is a story created by a group of people that do not know what the whole story contains. Different people write different sentences only knowing what the person before them wrote. Folding the paper and passing it along when they were done would keep the whole story a secret till the end.</p>
 				<div class="cs-btn-container">
-					<a href="#" class="ch-btn ch-btn-big">Start now!</a>
+					<a href="/stories/start" class="ch-btn ch-btn-big">Start now!</a>
 				</div>
 				<iframe src="http://www.facebook.com/plugins/facepile.php?app_id=424204097615701&amp;max_rows=1&amp;width=200" scrolling="no" frameborder="0"></iframe>
 			</section>

@@ -2,7 +2,7 @@ package chainedstory
 
 class StoriesController {
 
-	def requiredAuthentication = ['start']
+	def requiredAuthentication = ['starts']
 	
 	StoriesService storiesService
 	
