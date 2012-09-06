@@ -12,8 +12,7 @@ class Paragraph {
 	String facebookId //id of the paragraph object in FBOG
 	Date created 
 	 
-	static belongsTo = [story:Story]
-    static hasMany = [children: Paragraph]
+	static hasMany = [children: Paragraph]
 	static constraints = {
 		parent nullable:true
 		facebookId nullable:true
