@@ -189,7 +189,6 @@ hr {
 .cs-main .title {
 	border-bottom: 1px solid #EEE;
 	padding-bottom: 5px;
-	margin: 0 0 20px;
 	color: #5E3317;
 }
 
@@ -209,7 +208,7 @@ hr {
 .cs-story {
 	margin: 0 0 20px;
 	background: #ffffff url("../assets/linebottom.png") repeat-x left bottom;
-	padding: 10px;
+	padding: 5px;
 }
 
 .cs-message-ok {
@@ -233,7 +232,7 @@ hr {
 }
 .cs-paragraph blockquote {
 	margin: 0px 10px 0;
-	font-style: italic;
+	line-height: 1.4em;
 }
 
 section.cs-link-view  {
