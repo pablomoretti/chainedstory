@@ -15,11 +15,11 @@ class StoriesController {
 		[story:[id:1,name:'ss']]
 	}
 
-	def index() {
+	def story() {
 		println "want to get story ${params.id}"
 		def story = storiesService.getCompleteStory(params.id)
 		println story
-		render story as JSON
+		return [story:story]
 	}
 
 	def create(){
@@ -44,7 +44,7 @@ class StoriesController {
 
 
 	def view() {
-		println storiesService.getCompleteStory(params.story_id, null)
+		println storiesService.getCompleteStory(params.id, null)
 	}
 
 	def congrats(){
