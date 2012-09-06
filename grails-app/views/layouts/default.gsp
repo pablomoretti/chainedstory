@@ -26,6 +26,5 @@
 				$("#paragraph").countdown(512);
 			}
 		</script>
-        </script>
 	</body>
 </html>

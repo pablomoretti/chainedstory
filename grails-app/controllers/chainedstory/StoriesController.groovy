@@ -3,14 +3,20 @@ import grails.converters.JSON
 
 class StoriesController {
 
+	def requiredAuthentication = ['starts']
+	
 	StoriesService storiesService
-
+	
 	def start() {
 		request.setAttribute("facebook", [userId:1426088112])
 	}
 	
 	def create() {
 		request.setAttribute("facebook", [userId:1426088112])
+	}
+	
+	def read(){
+		[story:[id:1,name:'ss']]
 	}
 
 	def index() {
