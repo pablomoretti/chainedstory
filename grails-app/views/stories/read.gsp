@@ -36,7 +36,7 @@
 				</div>
 			</section>
 			<g:if test="${story.story.status != 'closed'}">
-				<g:if test="${session.facebook }" >
+				<g:if test="${add}" >
 					<section class="cs-link-view">
 						<form action="/stories/create" class="ch-form" method="post">
 							<input type="hidden" name="paragraph_id" value="${story.paragraphs[0].id}"/>
@@ -56,6 +56,13 @@
 						</form>
 					</section>
 				</g:if>
+				<g:else>
+					<p class="ch-form-actions">
+						<span class="cs-btn-container">
+							<a  href="/stories/add/${story.story.id}" class="ch-btn" > Continue the story </a>
+						</span>
+	     			</p>
+				</g:else>
 			</g:if>
 			<footer>
 				<p>ChainedStory &copy; 2012</p>
