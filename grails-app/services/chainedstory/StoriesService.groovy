@@ -205,7 +205,11 @@ class StoriesService {
 
 		//if not finished return only open paragraphs
 		if(! isFinished(story)) {
-			def oneOpenParagraph = Paragraph.findByStoryAndHeightLessThanAndChildrenIsNull(story, story.maxSteps)
+			def oneOpenParagraph = Paragraph.findAllByStoryAndHeightLessThan(story, story.maxSteps)
+			oneOpenParagraph = oneOpenParagraph.find{
+				it.children?.size() == 0
+			}
+
 			if (oneOpenParagraph == null) {
 				//story should be closed
 				story.status="closed"
