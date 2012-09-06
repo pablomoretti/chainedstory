@@ -2,13 +2,13 @@
 <html>
 	<head>
 		<meta name="layout" content="default"/>
-		<title>Chainedstory</title>
-		<meta name="description" content="Chainedstory"/>
+		<title>ChainedStory</title>
+		<meta name="description" content="ChainedStory"/>
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'landing.css')}">
 	</head>
 	<body>
 		<header class="cs-header">
-			<h1 class="cs-logo">Chainedstory</h1>
+			<h1 class="cs-logo">ChainedStory</h1>
 		</header>
 		<div class="cs-main">
 			<section class="ch-g2-3">
@@ -17,10 +17,10 @@
 				<div class="cs-btn-container">
 					<a href="/stories/start" class="ch-btn ch-btn-big">Start now!</a>
 				</div>
-				<iframe src="http://www.facebook.com/plugins/facepile.php?app_id=424204097615701&amp;max_rows=1&amp;width=200" scrolling="no" frameborder="0"></iframe>
+				<iframe id="facepile" src="http://www.facebook.com/plugins/facepile.php?app_id=424204097615701&amp;max_rows=1&amp;width=200" scrolling="no" frameborder="0"></iframe>
 			</section>
 			<section class="cs-link-view ch-g1-3">
-				<ul class="cs-story-full">
+				<ul class="cs-story">
 					<li>
 						<article class="cs-paragraph">
 							<div class="cs-media">

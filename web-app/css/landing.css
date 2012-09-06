@@ -5,6 +5,8 @@
 
 .cs-main h2 {
 	font-size: 3em;
+	color: #f1f1f1;
+	text-shadow: 0 -1px #5E3317;
 }
 
 .cs-main p {
