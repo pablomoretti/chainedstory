@@ -1,9 +1,31 @@
 package chainedstory
 import grails.converters.JSON
 import grails.util.Environment
+import chainedstory.Exceptions.*
 
 class StoriesService {
 	def transactional = false
+
+	def validateParameters(parameters, newStory = true) {
+		if (parameters == null)
+			throw new ParameterValidationException("No parameters")
+
+		if (newStory && parameters.title?.trim()?.length() == 0)
+			throw new ParameterValidationException("Missing title")
+
+		if (newStory && parameters.category?.trim()?.length() == 0)
+			throw new ParameterValidationException("Missing category")
+
+		if (newStory && parameters.steps == 0)
+			throw new ParameterValidationException("Missing steps")
+		if (parameters.author?.trim()?.length() == 0)
+			throw new ParameterValidationException("Missing author")
+		if (parameters.oauthToken?.trim()?.length() == 0)
+			throw new ParameterValidationException("Missing token")
+		if (parameters.content?.trim()?.length() == 0)
+			throw new ParameterValidationException("Missing content")
+				
+	}
 
 	/**
 	* Add new story
@@ -15,12 +37,13 @@ class StoriesService {
 	* 	steps: max paragraphs on a story branch
 	*/
 	def addNewStory(parameters) {
-
+		//validate new story parameters
+		validateParameters(parameters)
 		//generate new story
 		def theStory = new Story(title:parameters.title, 
 			created: new Date(), 
 			status:"starting",
-			category:"default",
+			category:parameters.category,
 			maxSteps: parameters.steps
 			)
 		def userName

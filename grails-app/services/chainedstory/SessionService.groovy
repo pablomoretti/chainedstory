@@ -7,12 +7,13 @@ public class SessionService {
 
 	static transactional = false
 
-	def createSession(HttpServletRequest request,Map data){
-		request.session.login = true
+	def createSession(HttpServletRequest request,Map facebook){
+		request.session.facebook = facebook
+		
 	}
 
 	def isAutenticate(HttpServletRequest request){
-		return request.isRequestedSessionIdValid() && request.session.login
+		return request.isRequestedSessionIdValid() && request.session.facebook
 	}
 
 	def destroySession(HttpServletRequest request){
