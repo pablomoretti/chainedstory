@@ -23,7 +23,7 @@
 					<li>
 						<article class="cs-paragraph">
 							<div class="cs-media">
-								<a href="https://www.facebook.com/${paragraph.facebook_id}" class="cs-img">
+								<a href="https://www.facebook.com/" class="cs-img">
 									<img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/572743_1831380123_2002424037_q.jpg" width="50" height="50">
 								</a>
 								<div class="cs-bd">
@@ -35,7 +35,7 @@
 					<li>
 						<article class="cs-paragraph">
 							<div class="cs-media">
-								<a href="https://www.facebook.com/${paragraph.facebook_id}" class="cs-img">
+								<a href="https://www.facebook.com/" class="cs-img">
 									<img src="http://profile.ak.fbcdn.net/hprofile-ak-prn1/174528_1426088112_7700916_n.jpg" width="50" height="50">
 								</a>
 								<div class="cs-bd">
