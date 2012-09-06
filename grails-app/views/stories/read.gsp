@@ -3,7 +3,7 @@
 	<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# chainedstory: http://ogp.me/ns/fb/chainedstory-dev#">
 		<meta property="fb:app_id" content="424204097615701" />
 		<meta property="og:type"   content="chainedstory:story" />
-		<meta property="og:url"    content="http://www.chainedstory.com/stories/read/${story.id}" />
+		<meta property="og:url"    content="http://www.chainedstory.com/stories/read/${story.story.id}" />
 		<meta property="og:title"  content="${story.paragraphs[0].authorName}'s Chained Story" />
 		<meta name="layout" content="default"/>
 		<title>${story.paragraphs[0].authorName}'s Chained Story</title>
@@ -32,5 +32,29 @@
 				</g:each>
 			</ul>
 		</section>
+		<%
+		println story.story.status
+		%>
+		<g:if test="${story.story.status != 'closed'}">
+		<hr>
+			<form action="/stories/create" class="ch-form" method="post">
+				<input type="hidden" name="paragraph_id" value="${story.paragraphs[0].id}"/>
+				<div class="cs-story">
+					<fieldset class="cs-media">
+							<label class="cs-img" for="paragraph">
+								<img src="https://graph.facebook.com/${session.facebook.id}/picture?type=square" width="50" height="50">
+							</label>
+							<div class="cs-bd ch-form-row">
+								<textarea id="paragraph" required placeholder="Start wrinting here..." name="text" maxlength="512"></textarea>
+							</div>
+					</fieldset>
+					</div>
+					<p class="ch-form-actions">
+						<span class="cs-btn-container">
+							<input type="submit" name="fold" value="Create" class="ch-btn" />
+						</span>
+					</p>
+			</form>
+		</g:if>
 	</body>
 </html>
