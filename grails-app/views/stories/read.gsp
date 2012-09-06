@@ -19,7 +19,7 @@
 					<li>
 						<article class="cs-paragraph">
 							<div class="cs-media">
-								<a href="https://www.facebook.com/${paragraph.facebookId}" class="cs-img">
+								<a href="https://www.facebook.com/profile.php?id=${paragraph.facebookId}" class="cs-img">
 									<img src="https://graph.facebook.com/${paragraph.authorId}/picture?type=square" width="50" height="50">
 								</a>
 								<div class="cs-bd">
@@ -30,8 +30,9 @@
 					</li>
 				</g:each>
 			</ul>
+			
 		<g:if test="${story.story.status != 'closed'}">
-			<g:if test="${session.facebook }" >
+			<g:if test="${add}" >
 			<hr>
 				<form action="/stories/create" class="ch-form" method="post">
 					<input type="hidden" name="paragraph_id" value="${story.paragraphs[0].id}"/>
@@ -52,6 +53,9 @@
 						</p>
 				</form>
 			</g:if>
+			<g:else>
+     			<a  href="/stories/add/${story.story.id}" > Continue </a>
+			</g:else>
 		</g:if>
 		</section>
 

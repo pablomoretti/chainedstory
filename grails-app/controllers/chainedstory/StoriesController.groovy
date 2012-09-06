@@ -3,7 +3,7 @@ import grails.converters.JSON
 
 class StoriesController {
 
-	def requiredAuthentication = ['start','create','congrats']
+	def requiredAuthentication = ['start','create','congrats','add']
 	
 	StoriesService storiesService
 	
@@ -14,7 +14,12 @@ class StoriesController {
 		def story = storiesService.getCompleteStory(params.id)
 		return [story:story]
 	}
-
+	
+	def add(){
+		def story = storiesService.getCompleteStory(params.id)
+		render(view:'read',model:[story:story,add:true])
+	}
+		
 	def create(){
 		if (params.paragraph_id == null) {
 			def newStory = storiesService.addNewStory(
@@ -38,14 +43,7 @@ class StoriesController {
 	}
 
 
-	def view() {
-		println storiesService.getCompleteStory(params.id, null)
-	}
-
 	def congrats(){
 	}
 
-	def paragraph(){
-		return ['paragraph':Paragraph.findById(params.id)]
-	}
 }
