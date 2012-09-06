@@ -10,6 +10,7 @@ class Paragraph {
 	Paragraph parent // parent paragraph, previous in the story
 	List children //knowing the children paragraphs saves some extra code
 	String facebookId //id of the paragraph object in FBOG
+	Date created 
 	 
 	static belongsTo = [story:Story]
     static hasMany = [children: Paragraph]
