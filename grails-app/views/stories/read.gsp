@@ -31,10 +31,10 @@
 					</li>
 				</g:each>
 			</ul>
-		</section>
-		<%
-		println story.story.status
-		%>
+			<%
+			println story.story.status
+			println story.story.status != 'closed'
+			%>
 		<g:if test="${story.story.status != 'closed'}">
 		<hr>
 			<form action="/stories/create" class="ch-form" method="post">
@@ -56,5 +56,7 @@
 					</p>
 			</form>
 		</g:if>
+				</section>
+
 	</body>
 </html>
