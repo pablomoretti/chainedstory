@@ -54,7 +54,11 @@
 				</form>
 			</g:if>
 			<g:else>
-     			<a  href="/stories/add/${story.story.id}" > Continue </a>
+				<p class="ch-form-actions">
+					<span class="cs-btn-container">
+						<a  href="/stories/add/${story.story.id}" class="ch-btn" > Continue the story </a>
+					</span>
+     			</p>
 			</g:else>
 		</g:if>
 		</section>
