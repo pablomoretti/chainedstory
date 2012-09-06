@@ -2,17 +2,17 @@ package chainedstory
 
 class Paragraph {
 
-	Story story
-	String author
-	String authorName
-	String content
-	Integer leftSteps
-	Paragraph parent
-	List children
-	String facebookId
+	Story story //story containing this paragraph
+	String content //paragraph content
+	String authorId //facebookId of the author 
+	String authorName //avoid extra call 
+	Integer height // position of the paragraph in the story branch 
+	Paragraph parent // parent paragraph, previous in the story
+	List children //knowing the children paragraphs saves some extra code
+	String facebookId //id of the paragraph object in FBOG
+	Date created 
 	 
-	static belongsTo = [story:Story]
-    static hasMany = [children: Paragraph]
+	static hasMany = [children: Paragraph]
 	static constraints = {
 		parent nullable:true
 		facebookId nullable:true

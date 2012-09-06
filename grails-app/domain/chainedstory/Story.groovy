@@ -2,16 +2,14 @@ package chainedstory
 
 class Story {
 	
-	String name
-	String author
-	String authorName
-	Integer status
-	Paragraph rootParagraph
-	
-	static hasMany = [paragraphs:Paragraph]
+	String title //story title
+	String status //(open/finished)
+	String category //not used yet. 
+	//String facebookId //We should add a Chained Story object to FBOG
+	Date created //creation date
+	Integer maxSteps //How long should a story branch be
 	
     static constraints = {
-		authorName nullable:true
-		rootParagraph nullable:true	
+		category nullable:true
     }
 }
