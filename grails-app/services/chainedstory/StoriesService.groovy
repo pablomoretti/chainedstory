@@ -17,7 +17,7 @@ class StoriesService {
 	def addNewStory(parameters) {
 
 		//generate new story
-		def theStory = new Story(title:paramters.title, 
+		def theStory = new Story(title:parameters.title, 
 			created: new Date(), 
 			status:"starting",
 			category:"default",
@@ -30,8 +30,9 @@ class StoriesService {
 			userName = "";
 		}
 
-		theStory.validate()
-		theStory.save(flush:true)
+		println theStory.validate()
+		println theStory.save(flush:true)
+		println theStory.properties
 		
 		//now create the paragraph
 		Paragraph theParagraph = new Paragraph(
@@ -42,7 +43,8 @@ class StoriesService {
 			created: new Date()
 			)
 		theParagraph.story = theStory;
-		
+		println theParagraph
+		println theStory
 		if (theParagraph.validate())
 			theParagraph.save(flush:true)
 		else {
@@ -57,9 +59,13 @@ class StoriesService {
 			url = "http://www.chainedstory.com/stories/paragraph/" + theParagraph.id.toString()
 		}
 		//post the write action on paragraph to FB
-		def resp = JSON.parse(new URL(getActionUrl(url, parameters.content,parameters.oauthToken)).text);
-		theParagraph.facebookId = resp.id
-		theParagraph.save()
+		try {
+			def resp = JSON.parse(new URL(getActionUrl(url, parameters.content,parameters.oauthToken)).text);
+			theParagraph.facebookId = resp.id
+			theParagraph.save()
+		} catch (Exception e) {
+			println "not published"
+		}
 		
 		//now the story is open for collaborations	
 		theStory.status = "open"
@@ -97,7 +103,7 @@ class StoriesService {
 			def userName
 			try {
 				userName = JSON.parse(new URL(getUserUrl(parameters.author, parameters.oauthToken)).text).first_name;
-			}catch (RuntimeException e) {
+			}catch (Exception e) {
 				userName = ""
 			}
 			
@@ -125,9 +131,14 @@ class StoriesService {
 				url = "http://www.chainedstory.com/stories/paragraph/" + theParagraph
 			}
 			//post new paragraph to open graph graph graph
-			def resp = JSON.parse(new URL(getActionUrl(url, parameters.content,parameters.oauthToken)).text);
+			def resp
+			try {
+				resp = JSON.parse(new URL(getActionUrl(url, parameters.content,parameters.oauthToken)).text);
+				} catch (Exception e) {
+					println "nones"
+				}
 		
-			theParagraph.facebookId = resp.id
+			theParagraph.facebookId = resp?.id
 			theParagraph.save()
 			if (parentParagraph.children == null )
 				parentParagraph.children = []
@@ -159,12 +170,14 @@ class StoriesService {
 		return "https://graph.facebook.com/${fbId}?access_token=${oauthToken}"
 	}
 	
-	def getCompleteStory(storyId, userId) {
+	def getCompleteStory(storyId, userId = null) {
 		//check if there is a paragraph from the user in the story
 		//to select that branch
 		Random rand = new Random()
 
 		def story = Story.get(storyId)
+		if (story == null)
+			throw new RuntimeException("Inexistent story")
 		if (isFinished(story))
 			println "historia terminada"
 		else
@@ -187,7 +200,7 @@ class StoriesService {
 			}
 			actualParagraph = userParagraph
 		} else
-			actualParagraph = Paragraph.findByStoryIdAndHeight(story,1)
+			actualParagraph = Paragraph.findByStoryAndHeight(story,1)
 
 		fullStory.paragraphs.add( actualParagraph)
 		while (actualParagraph && actualParagraph.children && actualParagraph.children.size() != 0) {
@@ -204,11 +217,12 @@ class StoriesService {
 	private boolean isFinished(story) {
 		if (story.status.equals("closed"))
 			return true
-		def pending = [story.rootParagraph]
+		def pending = [Paragraph.findByStoryAndHeight(story,1)]
 		def isFinished = true
+		def maxHeight = story.maxSteps
 		while (isFinished &&  pending.size()!= 0) {
 			def p = pending.pop()
-			if (p.leftSteps != 0) {
+			if (p.height < maxHeight) {
 				if  (p.children?.size() != 0) {
 					p.children.each {
 						pending.push(it)
