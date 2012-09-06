@@ -1,4 +1,5 @@
 package chainedstory
+import grails.converters.JSON
 
 class StoriesController {
 
@@ -16,7 +17,7 @@ class StoriesController {
 		println "want to get story ${params.id}"
 		def story = storiesService.getCompleteStory(params.id)
 		println story
-		return [story:story]
+		render story as JSON
 	}
 
 	def add(){
