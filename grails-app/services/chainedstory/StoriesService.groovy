@@ -201,16 +201,26 @@ class StoriesService {
 		def story = Story.get(storyId)
 		if (story == null)
 			throw new RuntimeException("Inexistent story")
-		if (isFinished(story))
-			println "historia terminada"
-		else
-			println "no terminada"
+		def fullStory = [story:story, paragraphs:[]]
+
+		//if not finished return only open paragraphs
+		if(! isFinished(story)) {
+			def oneOpenParagraph = Paragraph.findByStoryAndHeightLessThanAndChildrenIsNull(story, story.maxSteps)
+			if (oneOpenParagraph == null) {
+				//story should be closed
+				story.status="closed"
+				story.save(flush:true)
+			} else {
+				fullStory.paragraphs.add(oneOpenParagraph)
+				return fullStory
+			}
+		}
+
 
 		def userParagraph
-		if (userId)
+		if (userId )
 			userParagraph = Paragraph.findByAuthorAndStoryId(userId, storyId)
 
-		def fullStory = [story:story, paragraphs:[]]
 		def actualParagraph
 		//check if We found a paragraph belonging to the user in the story
 		if (userParagraph) {
