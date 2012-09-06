@@ -8,7 +8,6 @@ class StoriesController {
 	StoriesService storiesService
 	
 	def start() {
-		request.setAttribute("facebook", [userId:1426088112])
 	}
 	
 	def read(){
@@ -25,19 +24,19 @@ class StoriesController {
 	def create(){
 		if (params.paragraph_id == null) {
 			def newStory = storiesService.addNewStory(
-				author:request.getAttribute("facebook")?.userId?:"123", 
+				author:request.session.facebook.id, 
 				content:params.text,
 				category: params.category,
-				oauthToken:request.getAttribute("facebook")?.oauth_token,
+				oauthToken:request.session.facebook.accessToken,
 				title: params.name,
 				steps: params.steps?:10)
 			redirect(action:"congrats", params:[id:newStory])
 		} else {
 			def newParagraph = storiesService.addNewParagraph(
 				paragraph:params.paragraph_id,
-				author:request.getAttribute("facebook")?.userId?:"123", 
+				author:request.session.facebook.id,
 				content:params.paragraph,
-				oauthToken:request.getAttribute("facebook")?.oauth_token)
+				oauthToken:request.session.facebook.accessToken)
 			redirect(action:"congrats", params:[id:newParagraph])
 		}
 	}
