@@ -15,14 +15,21 @@ class StoriesController {
 	def add(){
 		
 		println "save ${params.paragraph}"
+		println "id requested ${params.paragraph_id}"
 		
-		def newStory = storiesService.addStory(author:request.getAttribute("facebook").user_id, content:params.paragraph,oauthToken:request.getAttribute("facebook").oauth_token)
+		if (params.paragraph_id == null) {
+			def newStory = storiesService.addStory(author:request.getAttribute("facebook").user_id, content:params.paragraph,oauthToken:request.getAttribute("facebook").oauth_token)
+			redirect(action:"congrats", params:[id:newStory])
+		} else {
+			def newParagraph = storiesService.addParagraph(paragraph:params.paragraph_id,author:request.getAttribute("facebook").user_id, content:params.paragraph,oauthToken:request.getAttribute("facebook").oauth_token)
 		
-		redirect(action:"congrats", params:[id:newStory])
+		}
 		
 	}
 	
+	
 	def view() {
+		println storiesService.getCompleteStory(params.story_id, null)
 	}
 	
 	def congrats(){
