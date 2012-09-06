@@ -48,6 +48,9 @@
 					</p>
 				</form>
 			</section>
+			<footer>
+				<p>ChainedStory &copy; 2012</p>
+			</footer>
 		</div>
 	</body>
 </html>
