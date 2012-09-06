@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta name="layout" content="default"/>
-		<title>${paragraph.author}'s chained story</title>
+		<title>${story.paragraphs[0].authorName}'s chained story</title>
 		<meta name="description" content="Chainedstory"/>
 	</head>
 	<body>
@@ -16,11 +16,11 @@
 					<li>
 						<article class="cs-paragraph">
 							<div class="cs-media">
-								<a href="https://www.facebook.com/${paragraph.facebook_id}" class="cs-img">
-									<img src="https://graph.facebook.com/${paragraph.user_id}/picture?type=square" width="50" height="50">
+								<a href="https://www.facebook.com/${paragraph.facebookId}" class="cs-img">
+									<img src="https://graph.facebook.com/${paragraph.authorId}/picture?type=square" width="50" height="50">
 								</a>
 								<div class="cs-bd">
-									<blockquote>${paragraph.text}</blockquote>
+									<blockquote>${paragraph.content}</blockquote>
 								</div>
 							</div>
 						</article>

@@ -20,7 +20,7 @@ class StoriesService {
 		def theStory = new Story(title:parameters.title, 
 			created: new Date(), 
 			status:"starting",
-			category:"default",
+			category:parameters.category,
 			maxSteps: parameters.steps
 			)
 		def userName
