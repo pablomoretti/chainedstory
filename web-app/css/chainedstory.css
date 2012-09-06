@@ -140,20 +140,6 @@ hr {
 	position: relative;
 }
 
-/*.cs-link-view:before {
-	content: url("http://go.web-g.com/images/themes/default/tape1.png");
-	position: absolute;
-	top: -65px;
-	left: -65px;
-}
-
-.cs-link-view:after {
-	content: url("http://go.web-g.com/images/themes/default/tape1.png");
-	position: absolute;
-	bottom: -65px;
-	right: -65px;
-}*/
-
 .cs-message-ok {
 	text-align: center;
 	line-height: 4em;
