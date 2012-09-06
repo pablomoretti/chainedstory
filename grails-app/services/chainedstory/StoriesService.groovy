@@ -1,26 +1,27 @@
 package chainedstory
 import grails.converters.JSON
-import grails.util.Environment;
-import java.util.Random
+import grails.util.Environment
 
 class StoriesService {
-	def transactional = true
+	def transactional = false
 
 	def addStory(parameters) {
 
 		//generate new story
 		def theStory = new Story(name:"another one bites the dust", author:parameters.author, status:0)
+		
 		def userName = JSON.parse(new URL(getUserUrl(parameters.author, parameters.oauthToken)).text).first_name;
+		
 		theStory.authorName = userName;
 		theStory.validate()
-		theStory.save()
+		theStory.save(flush:true)
 		
 		Paragraph theParagraph = new Paragraph(author:parameters.author, authorName: userName, content:parameters.content, leftSteps : 10)
 		
 		theParagraph.story = theStory;
 		
 		if (theParagraph.validate())
-			theParagraph.save()
+			theParagraph.save(flush:true)
 		else {
 			throw new RuntimeException(theParagraph.errors.toString())
 		}
@@ -31,7 +32,7 @@ class StoriesService {
 			url = "http://samples.ogp.me/222499907876025"
 		}
 		else{
-			url = "http://www.chainedstory.com/stories/paragraph/" + theParagraph
+			url = "http://www.chainedstory.com/stories/paragraph/" + theParagraph.id.toString()
 		}
 
 		def resp = JSON.parse(new URL(getActionUrl(url, parameters.content,parameters.oauthToken)).text);
@@ -102,9 +103,8 @@ class StoriesService {
 
 	}
 
-
-	def getUserUrl (fbId, access_token) {
-		return "https://graph.facebook.com/${fbId}?access_token=${access_token}"
+	def getUserUrl (fbId,oauthToken) {
+		return "https://graph.facebook.com/${fbId}?access_token=${oauthToken}"
 	}
 	
 	def getStory(id) {
