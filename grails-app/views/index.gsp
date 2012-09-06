@@ -13,7 +13,7 @@
 		<div class="cs-main">
 			<section class="ch-g2-3">
 				<h2>Create a collaborative story with your friends and others.</h2>
-				<p>ChainedStory is a story created by a group of people that do not know what the whole story contains. Different people write different sentences only knowing what the person before them wrote. Write and share with your friends and keeps the whole story a secret till the end.</p>
+				<p>ChainedStory is a story created by a group of people that do not know what the whole story contains. Different people write different sentences only knowing what the person before them wrote. Write and share with your friends while the whole story is kept secret till the end.</p>
 				<div class="cs-btn-container">
 					<a href="/stories/start" class="ch-btn ch-btn-big">Start now!</a>
 				</div>
@@ -30,7 +30,7 @@
 										<img src="http://graph.facebook.com/1831380123/picture?type=square" width="50" height="50">
 									</a>
 									<div class="cs-bd">
-										<blockquote>Once upon a time, three developers from Argentine participated on Facebook Developers World HACK.</blockquote>
+										<blockquote>Once upon a time, three developers from Argentina participated on Facebook Developers World HACK.</blockquote>
 									</div>
 								</div>
 							</article>
@@ -54,7 +54,7 @@
 										<img src="http://graph.facebook.com/1466346255/picture?type=square" width="50" height="50">
 									</a>
 									<div class="cs-bd">
-										<blockquote>About six long hours, they finished it, they presented it and they won best overall application category.</blockquote>
+										<blockquote>About six long hours later, they finished it, they presented it and they won best overall application category.</blockquote>
 									</div>
 								</div>
 							</article>
