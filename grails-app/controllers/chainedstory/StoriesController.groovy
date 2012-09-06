@@ -22,7 +22,8 @@ class StoriesController {
 			redirect(action:"congrats", params:[id:newStory])
 		} else {
 			def newParagraph = storiesService.addParagraph(paragraph:params.paragraph_id,author:request.getAttribute("facebook").user_id, content:params.paragraph,oauthToken:request.getAttribute("facebook").oauth_token)
-		
+			redirect(action:"congrats", params:[id:newParagraph])
+			
 		}
 		
 	}

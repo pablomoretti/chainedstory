@@ -146,7 +146,7 @@ class StoriesService {
 			actualParagraph = userParagraph.parent;
 			while (actualParagraph != null) {
 				def para = actualParagraph.properties
-				para.pid = actualParagraph.id
+				para.pid = actualParagraph
 				actualStory.paragraphs = [para] + actualStory.paragraphs
 				actualParagraph = actualParagraph.parent
 			}
@@ -154,13 +154,13 @@ class StoriesService {
 		} else
 			actualParagraph = story.rootParagraph
 		def para = actualParagraph.properties
-		para.pid = actualParagraph.id
+		para.pid = actualParagraph
 		actualStory.paragraphs.add( para)
 		while (actualParagraph && actualParagraph.children && actualParagraph.children.size() != 0) {
 			def option = rand.nextInt(actualParagraph.children?.size())
 			actualParagraph = actualParagraph.children.getAt(option)
 			para = actualParagraph.properties
-			para.pid = actualParagraph.id
+			para.pid = actualParagraph
 			actualStory.paragraphs.add( para)
 		}
 
