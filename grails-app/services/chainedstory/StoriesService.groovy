@@ -46,12 +46,8 @@ class StoriesService {
 			category:parameters.category,
 			maxSteps: parameters.steps
 			)
-		def userName
-		try {		
-			userName = JSON.parse(new URL(getUserUrl(parameters.author, parameters.oauthToken)).text).first_name;
-		} catch (RuntimeException) {
-			userName = "";
-		}
+		
+		def userName = parameters.authorName
 
 		println theStory.validate()
 		println theStory.save(flush:true)
@@ -76,11 +72,13 @@ class StoriesService {
 
 		def url = ""
 		if(Environment.isDevelopmentMode()){
-			url = "http://samples.ogp.me/222499907876025"
+			url = "http://samples.ogp.me/225279600931389"
 		}
 		else{
-			url = "http://www.chainedstory.com/stories/paragraph/" + theParagraph.id.toString()
+			url = "http://www.chainedstory.com/stories/read/" + theStory.id.toString()
 		}
+		
+		println "------" + getActionUrl(url, parameters.content,parameters.oauthToken)
 		//post the write action on paragraph to FB
 		try {
 			def resp = JSON.parse(new URL(getActionUrl(url, parameters.content,parameters.oauthToken)).text);
@@ -148,10 +146,10 @@ class StoriesService {
 				throw new RuntimeException(theParagraph.errors.toString())
 			def url
 			if(Environment.isDevelopmentMode()){
-				url = "http://samples.ogp.me/222499907876025"
+				url = "http://samples.ogp.me/225279600931389"
 			}
 			else{
-				url = "http://www.chainedstory.com/stories/paragraph/" + theParagraph
+				url = "http://www.chainedstory.com/stories/read/" + story.id.toString()
 			}
 			//post new paragraph to open graph graph graph
 			def resp
@@ -182,11 +180,9 @@ class StoriesService {
 			namespage = namespage + "-dev"
 		}
 
-		return "https://graph.facebook.com/me/${namespage}:write?paragraph=" +
+		return "https://graph.facebook.com/me/${namespage}:write?story=" +
 		objectUrl.encodeAsURL() +
-		"&access_token=${oauthToken}&method=post" +
-		"&text=${text.encodeAsURL()}"
-
+		"&access_token=${oauthToken}&method=post"
 	}
 
 	def getUserUrl (fbId,oauthToken) {
