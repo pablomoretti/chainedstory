@@ -11,9 +11,7 @@ class StoriesController {
 	}
 	
 	def read(){
-		println "want to get story ${params.id}"
 		def story = storiesService.getCompleteStory(params.id)
-		println story
 		return [story:story]
 	}
 
