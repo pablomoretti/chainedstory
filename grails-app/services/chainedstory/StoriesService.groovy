@@ -5,19 +5,42 @@ import grails.util.Environment
 class StoriesService {
 	def transactional = false
 
-	def addStory(parameters) {
+	/**
+	* Add new story
+	* parameters contains:
+	*	author: FBID of the author
+	*	oauthToken: FB acces token 
+	*	content: text of the paragraph
+	*	title: title of the new story
+	* 	steps: max paragraphs on a story branch
+	*/
+	def addNewStory(parameters) {
 
 		//generate new story
-		def theStory = new Story(name:"another one bites the dust", author:parameters.author, status:0)
-		
-		def userName = JSON.parse(new URL(getUserUrl(parameters.author, parameters.oauthToken)).text).first_name;
-		
-		theStory.authorName = userName;
+		def theStory = new Story(title:paramters.title, 
+			created: new Date(), 
+			status:"starting",
+			category:"default",
+			maxSteps: parameters.steps
+			)
+		def userName
+		try {		
+			userName = JSON.parse(new URL(getUserUrl(parameters.author, parameters.oauthToken)).text).first_name;
+		} catch (RuntimeException) {
+			userName = "";
+		}
+
 		theStory.validate()
 		theStory.save(flush:true)
 		
-		Paragraph theParagraph = new Paragraph(author:parameters.author, authorName: userName, content:parameters.content, leftSteps : 10)
-		
+		//now create the paragraph
+		Paragraph theParagraph = new Paragraph(
+			authorId:parameters.author, 
+			authorName: userName, 
+			content:parameters.content, 
+			height:1,
+			created: new Date()
+			)
 		theParagraph.story = theStory;
 		
 		if (theParagraph.validate())
@@ -27,29 +50,42 @@ class StoriesService {
 		}
 
 		def url = ""
-
 		if(Environment.isDevelopmentMode()){
 			url = "http://samples.ogp.me/222499907876025"
 		}
 		else{
 			url = "http://www.chainedstory.com/stories/paragraph/" + theParagraph.id.toString()
 		}
-
+		//post the write action on paragraph to FB
 		def resp = JSON.parse(new URL(getActionUrl(url, parameters.content,parameters.oauthToken)).text);
 		theParagraph.facebookId = resp.id
 		theParagraph.save()
 		
-		println theParagraph.id.toString()
-		
-		theStory.rootParagraph = theParagraph;
+		//now the story is open for collaborations	
+		theStory.status = "open"
 		theStory.save()
-		return theParagraph.id
+		return theStory.id
 	}
+
+
+	/**
+	* Validates if a paragraph id is a valid parent for a new paragraph
+	*/
 	def validateParagraph(parentParagraphId) {
 		def theParagraph = Paragraph.get(parentParagraphId)
-		return theParagraph != null && theParagraph.leftSteps > 0 
+		return theParagraph != null && theParagraph?.height < theParagraph?.story.maxSteps 
 	}
-	def addParagraph(parameters) {
+
+	/**
+	* Adds new paragraph to an existing story with a
+	* previously selected parent paragraoh:
+	* parameters:
+	*	author: FBID of the author
+	*	oauthToken: FB acces token 
+	*	content: text of the paragraph
+	*	paragraph: parent paragraph id
+	*/
+	def addNewParagraph(parameters) {
 		//validate
 		if (!validateParagraph(parameters.paragraph)) {
 			println "Error validando"
@@ -58,9 +94,24 @@ class StoriesService {
 			def parentParagraph = Paragraph.get(parameters.paragraph)
 			def theStory = parentParagraph.story
 			
-			def userName = JSON.parse(new URL(getUserUrl(parameters.author, parameters.oauthToken)).text).first_name;
+			def userName
+			try {
+				userName = JSON.parse(new URL(getUserUrl(parameters.author, parameters.oauthToken)).text).first_name;
+			}catch (RuntimeException e) {
+				userName = ""
+			}
 			
-			Paragraph theParagraph = new Paragraph(parent:parentParagraph, author:parameters.author, authorName: userName, content:parameters.content, leftSteps : parentParagraph.leftSteps-1, story:theStory)
+			
+				 
+			Paragraph theParagraph = new Paragraph(
+				parent:parentParagraph,
+				authorId:parameters.author, 
+				authorName: userName, 
+				content:parameters.content, 
+				height:parentParagraph.height + 1,
+				created: new Date()
+			)
+			theParagraph.story = theStory
 			
 			if (theParagraph.validate())
 				theParagraph.save()
@@ -73,6 +124,7 @@ class StoriesService {
 			else{
 				url = "http://www.chainedstory.com/stories/paragraph/" + theParagraph
 			}
+			//post new paragraph to open graph graph graph
 			def resp = JSON.parse(new URL(getActionUrl(url, parameters.content,parameters.oauthToken)).text);
 		
 			theParagraph.facebookId = resp.id
@@ -107,77 +159,51 @@ class StoriesService {
 		return "https://graph.facebook.com/${fbId}?access_token=${oauthToken}"
 	}
 	
-	def getStory(id) {
-
-		return [
-			id:1,
-			name:"another one bites the dust",
-			author:"3",
-			authorName:"juanitoull",
-			paragraphs:[
-				[facebook_id:"1", user_id:"2", name:"juancito",text:"texto1"],
-				[facebook_id:"2", user_id:"3", name:"juancito",text:"texto1"],
-				[facebook_id:"3", user_id:"4", name:"juancito",text:"texto1"],
-				[facebook_id:"4", user_id:"5", name:"juancito",text:"texto1"]
-
-			]
-			]
-
-	}
-
 	def getCompleteStory(storyId, userId) {
 		//check if there is a paragraph from the user in the story
+		//to select that branch
 		Random rand = new Random()
-
 
 		def story = Story.get(storyId)
 		if (isFinished(story))
-		println "historia terminada"
+			println "historia terminada"
 		else
-		println "no terminada"
+			println "no terminada"
 
 		def userParagraph
 		if (userId)
-		userParagraph = Paragraph.findByAuthorAndStoryId(userId, storyId)
+			userParagraph = Paragraph.findByAuthorAndStoryId(userId, storyId)
 
-		def actualStory = [id:story.id, name:story.name, author:story.author, authorName :story.authorName, paragraphs:[]]
+		def fullStory = [story:story, paragraphs:[]]
 		def actualParagraph
+		//check if We found a paragraph belonging to the user in the story
 		if (userParagraph) {
+			//generate a linear story using than paragraph
+			//first find a path from the paragraph to the beginning
 			actualParagraph = userParagraph.parent;
 			while (actualParagraph != null) {
-				def para = actualParagraph.properties
-				para.pid = actualParagraph
-				actualStory.paragraphs = [para] + actualStory.paragraphs
+				fullStory.paragraphs = [actualParagraph] + fullStory.paragraphs
 				actualParagraph = actualParagraph.parent
 			}
 			actualParagraph = userParagraph
 		} else
-			actualParagraph = story.rootParagraph
-		def para = actualParagraph.properties
-		para.pid = actualParagraph
-		actualStory.paragraphs.add( para)
+			actualParagraph = Paragraph.findByStoryIdAndHeight(story,1)
+
+		fullStory.paragraphs.add( actualParagraph)
 		while (actualParagraph && actualParagraph.children && actualParagraph.children.size() != 0) {
+			//select a random child
 			def option = rand.nextInt(actualParagraph.children?.size())
 			actualParagraph = actualParagraph.children.getAt(option)
-			para = actualParagraph.properties
-			para.pid = actualParagraph
-			actualStory.paragraphs.add( para)
+			fullStory.paragraphs.add( actualParagraph)
 		}
 
-		return actualStory
+		return fullStory
 	}
 	
-	
-	def getRootParagraph(paragraph) {
-		def parent = paragraph.parent
-		while (parent != null) {
-			paragraph = parent
-			parent = paragraph.parent
-		}
-		return paragraph
-	}
 
 	private boolean isFinished(story) {
+		if (story.status.equals("closed"))
+			return true
 		def pending = [story.rootParagraph]
 		def isFinished = true
 		while (isFinished &&  pending.size()!= 0) {
