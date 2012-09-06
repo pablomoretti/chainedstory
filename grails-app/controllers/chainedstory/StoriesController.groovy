@@ -29,7 +29,7 @@ class StoriesController {
 			def newParagraph = storiesService.addNewParagraph(
 				paragraph:params.paragraph_id,
 				author:request.session.facebook.id,
-				content:params.paragraph,
+				content:params.text,
 				oauthToken:request.session.facebook.accessToken.value)
 			redirect(action:"congrats", params:[id:newParagraph])
 		}
