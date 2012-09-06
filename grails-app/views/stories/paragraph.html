@@ -17,93 +17,30 @@
 			<h1 class="cs-logo">Chainedstory</h1>
 		</header>
 		<div class="cs-main">
-			<section class="ch-g2-3">
-				<h2>Create a collaborative story with your friends and others.</h2>
-				<p>Chained story is a story created by a group of people that do not know what the whole story contains. Different people write different sentences only knowing what the person before them wrote. Folding the paper and passing it along when they were done would keep the whole story a secret till the end.</p>
-				<div class="cs-btn-container">
-					<a href="#" class="ch-btn ch-btn-big">Start now!</a>
-				</div>
+			<section class="cs-link-view">
+				<form action="/stories/add" class="ch-form" method="post">
+					<div class="cs-media">
+						<a href="https://www.facebook.com/${request.getAttribute('facebook')?.user_id}" class="cs-img">
+							<img src="https://graph.facebook.com/${request.getAttribute('facebook')?.user_id}/picture?type=square" width="50" height="50">
+						</a>
+						<div class="cs-bd ch-form-row">
+							<textarea required placeholder="Start an awesome story with your friends..." name="paragraph" id="paragraph" maxlength="512"></textarea>
+						</div>
+					</div>
+					<p class="ch-form-actions">
+						<span class="cs-btn-container">
+							<input type="submit" name="fold" value="Create" class="ch-btn" />
+						</span>
+					</p>
+				</form>
 			</section>
-			<section class="cs-link-view ch-g1-3">
-				<ul class="cs-story-full">
-					<li>
-						<article class="cs-paragraph">
-							<div class="cs-media">
-								<a href="https://www.facebook.com/${paragraph.facebook_id}" class="cs-img">
-									<img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/572743_1831380123_2002424037_q.jpg" width="50" height="50">
-								</a>
-								<div class="cs-bd">
-									<blockquote>Habia una vez, tres developers de Argentina que querían viajar a San Francisco, entonces</blockquote>
-								</div>
-							</div>
-						</article>
-					</li>
-					<li>
-						<article class="cs-paragraph">
-							<div class="cs-media">
-								<a href="https://www.facebook.com/${paragraph.facebook_id}" class="cs-img">
-									<img src="http://profile.ak.fbcdn.net/hprofile-ak-prn1/174528_1426088112_7700916_n.jpg" width="50" height="50">
-								</a>
-								<div class="cs-bd">
-									<blockquote>un día, uno de ellos les comenta que Facebook estaba organizando un Hackday en Buenos Aires. Los tres muy ilusionados se anotaron para poder participar. Llegado el día,</blockquote>
-								</div>
-							</div>
-						</article>
-					</li>
-					<li>
-						<article class="cs-paragraph">
-							<div class="cs-media">
-								<a href="http://www.facebook.com/dario.guzik" class="cs-img">
-									<img src="http://profile.ak.fbcdn.net/hprofile-ak-prn1/48984_1466346255_1267_n.jpg" width="50" height="50">
-								</a>
-								<div class="cs-bd">
-									<blockquote>se encontraron con que no tenían ninguna idea pensada para desarrollar en el tiempo de 6 horas. Luego de las charlas y la rica comida que se sirvió,</blockquote>
-								</div>
-							</div>
-						</article>
-					</li>
-
-					<!--li>
-						<article class="cs-paragraph">
-							<div class="cs-media">
-								<a href="https://www.facebook.com/${paragraph.facebook_id}" class="cs-img">
-									<img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/572743_1831380123_2002424037_q.jpg" width="50" height="50">
-								</a>
-								<div class="cs-bd">
-									<blockquote>se juntaron y en poco tiempo recordaron aquellas viejas epocas en donde la gente se juntaba junto al fogon a cantar canciones y jugar algunos juegos.</blockquote>
-								</div>
-							</div>
-						</article>
-					</li>
-					<li>
-						<article class="cs-paragraph">
-							<div class="cs-media">
-								<a href="https://www.facebook.com/${paragraph.facebook_id}" class="cs-img">
-									<img src="http://profile.ak.fbcdn.net/hprofile-ak-prn1/174528_1426088112_7700916_n.jpg" width="50" height="50">
-								</a>
-								<div class="cs-bd">
-									<blockquote>Uno de ellos, Dario, recordo el juego de las historias encadenadas y...</blockquote>
-								</div>
-							</div>
-						</article>
-					</li>
-					<li>
-						<article class="cs-paragraph">
-							<div class="cs-media">
-								<a href="http://www.facebook.com/dario.guzik" class="cs-img">
-									<img src="http://profile.ak.fbcdn.net/hprofile-ak-prn1/48984_1466346255_1267_n.jpg" width="50" height="50">
-								</a>
-								<div class="cs-bd">
-									<blockquote>... decidieron que podían implementarla y eso es lo que hicieron!.</blockquote>
-								</div>
-							</div>
-						</article>
-					</li->
-				</ul>
-			</section-->
 		</div>
-		<!--footer></footer-->
-        <script src="../../../web-app/js/jquery.js')}"></script>
+        <script src="../../../web-app/js/jquery.js"></script>
         <script src="../../../web-app/js/chico-min-0.11.js"></script>
+    	<script>
+			if ($("#paragraph").length > 0) {
+				$("#paragraph").countdown(512);
+			}
+		</script>
 	</body>
 </html>

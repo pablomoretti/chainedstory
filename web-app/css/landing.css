@@ -1,0 +1,39 @@
+.cs-logo {
+	font-size: 10em;
+	margin-bottom: .2em;
+}
+
+.cs-main h2 {
+	font-size: 3em;
+}
+
+.cs-main p {
+	color: #f1f1f1;
+	text-shadow: 0 -1px #5E3317;
+	margin: 20px 0;
+	font-size: 1.1em;
+	line-height: 1.3em;
+}
+
+.cs-main .cs-btn-container {
+	margin-left: -70px;
+	position: relative;
+	left: 50%;
+}
+
+.cs-link-view {
+	position: relative;
+	top: 0px;
+	left: 20px;
+}
+
+.cs-main .cs-link-view {
+	-webkit-transform: rotate(3deg);
+	transform: rotate(3deg);
+}
+
+
+#facepile {
+	display: block;
+	margin-top: 50px;
+}

@@ -1,122 +1,64 @@
 <!doctype html>
 <html>
 	<head>
-		<meta name="layout" content="main"/>
-		<title>Welcome to Grails</title>
-		<style type="text/css" media="screen">
-			#status {
-				background-color: #eee;
-				border: .2em solid #fff;
-				margin: 2em 2em 1em;
-				padding: 1em;
-				width: 12em;
-				float: left;
-				-moz-box-shadow: 0px 0px 1.25em #ccc;
-				-webkit-box-shadow: 0px 0px 1.25em #ccc;
-				box-shadow: 0px 0px 1.25em #ccc;
-				-moz-border-radius: 0.6em;
-				-webkit-border-radius: 0.6em;
-				border-radius: 0.6em;
-			}
-
-			.ie6 #status {
-				display: inline; /* float double margin fix http://www.positioniseverything.net/explorer/doubled-margin.html */
-			}
-
-			#status ul {
-				font-size: 0.9em;
-				list-style-type: none;
-				margin-bottom: 0.6em;
-				padding: 0;
-			}
-            
-			#status li {
-				line-height: 1.3;
-			}
-
-			#status h1 {
-				text-transform: uppercase;
-				font-size: 1.1em;
-				margin: 0 0 0.3em;
-			}
-
-			#page-body {
-				margin: 2em 1em 1.25em 18em;
-			}
-
-			h2 {
-				margin-top: 1em;
-				margin-bottom: 0.3em;
-				font-size: 1em;
-			}
-
-			p {
-				line-height: 1.5;
-				margin: 0.25em 0;
-			}
-
-			#controller-list ul {
-				list-style-position: inside;
-			}
-
-			#controller-list li {
-				line-height: 1.3;
-				list-style-position: inside;
-				margin: 0.25em 0;
-			}
-
-			@media screen and (max-width: 480px) {
-				#status {
-					display: none;
-				}
-
-				#page-body {
-					margin: 0 1em 1em;
-				}
-
-				#page-body h1 {
-					margin-top: 0;
-				}
-			}
-		</style>
+		<meta name="layout" content="default"/>
+		<title>Chainedstory</title>
+		<meta name="description" content="Chainedstory"/>
+		<link rel="stylesheet" href="${resource(dir: 'css', file: 'landing.css')}">
 	</head>
 	<body>
-		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div id="status" role="complementary">
-			<h1>Application Status</h1>
-			<ul>
-				<li>App version: <g:meta name="app.version"/></li>
-				<li>Grails version: <g:meta name="app.grails.version"/></li>
-				<li>Groovy version: ${org.codehaus.groovy.runtime.InvokerHelper.getVersion()}</li>
-				<li>JVM version: ${System.getProperty('java.version')}</li>
-				<li>Reloading active: ${grails.util.Environment.reloadingAgentEnabled}</li>
-				<li>Controllers: ${grailsApplication.controllerClasses.size()}</li>
-				<li>Domains: ${grailsApplication.domainClasses.size()}</li>
-				<li>Services: ${grailsApplication.serviceClasses.size()}</li>
-				<li>Tag Libraries: ${grailsApplication.tagLibClasses.size()}</li>
-			</ul>
-			<h1>Installed Plugins</h1>
-			<ul>
-				<g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
-					<li>${plugin.name} - ${plugin.version}</li>
-				</g:each>
-			</ul>
-		</div>
-		<div id="page-body" role="main">
-			<h1>Welcome to Grails</h1>
-			<p>Congratulations, you have successfully started your first Grails application! At the moment
-			   this is the default page, feel free to modify it to either redirect to a controller or display whatever
-			   content you may choose. Below is a list of controllers that are currently deployed in this application,
-			   click on each to execute its default action:</p>
-
-			<div id="controller-list" role="navigation">
-				<h2>Available Controllers:</h2>
-				<ul>
-					<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-						<li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-					</g:each>
+		<header class="cs-header">
+			<h1 class="cs-logo">Chainedstory</h1>
+		</header>
+		<div class="cs-main">
+			<section class="ch-g2-3">
+				<h2>Create a collaborative story with your friends and others.</h2>
+				<p>Chained story is a story created by a group of people that do not know what the whole story contains. Different people write different sentences only knowing what the person before them wrote. Folding the paper and passing it along when they were done would keep the whole story a secret till the end.</p>
+				<div class="cs-btn-container">
+					<a href="#" class="ch-btn ch-btn-big">Start now!</a>
+				</div>
+				<iframe src="http://www.facebook.com/plugins/facepile.php?app_id=424204097615701&amp;max_rows=1&amp;width=200" scrolling="no" frameborder="0"></iframe>
+			</section>
+			<section class="cs-link-view ch-g1-3">
+				<ul class="cs-story-full">
+					<li>
+						<article class="cs-paragraph">
+							<div class="cs-media">
+								<a href="https://www.facebook.com/guillotepaz" class="cs-img" target="_blank">
+									<img src="http://graph.facebook.com/1831380123/picture?type=square" width="50" height="50">
+								</a>
+								<div class="cs-bd">
+									<blockquote>Habia una vez, tres developers de Argentina que querían viajar a San Francisco, entonces</blockquote>
+								</div>
+							</div>
+						</article>
+					</li>
+					<li>
+						<article class="cs-paragraph">
+							<div class="cs-media">
+								<a href="https://www.facebook.com/moretti.pablo" class="cs-img" target="_blank">
+									<img src="http://graph.facebook.com/1426088112/picture?type=square" width="50" height="50">
+								</a>
+								<div class="cs-bd">
+									<blockquote>un día, uno de ellos les comenta que Facebook estaba organizando un Hackday en Buenos Aires. Los tres muy ilusionados se anotaron para poder participar. Llegado el día,</blockquote>
+								</div>
+							</div>
+						</article>
+					</li>
+					<li>
+						<article class="cs-paragraph">
+							<div class="cs-media">
+								<a href="http://www.facebook.com/dario.guzik" class="cs-img" target="_blank">
+									<img src="http://graph.facebook.com/1466346255/picture?type=square" width="50" height="50">
+								</a>
+								<div class="cs-bd">
+									<blockquote>se encontraron con que no tenían ninguna idea pensada para desarrollar en el tiempo de 6 horas. Luego de las charlas y la rica comida que se sirvió,</blockquote>
+								</div>
+							</div>
+						</article>
+					</li>
 				</ul>
-			</div>
+			</section>
 		</div>
 	</body>
 </html>
