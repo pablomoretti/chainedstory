@@ -3,7 +3,7 @@ import grails.converters.JSON
 
 class StoriesController {
 
-	def requiredAuthentication = ['start']
+	def requiredAuthentication = ['start','create','congrats']
 	
 	StoriesService storiesService
 	
