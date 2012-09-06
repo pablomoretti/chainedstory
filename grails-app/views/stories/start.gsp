@@ -14,8 +14,8 @@
 		<section class="cs-link-view">
 			<form action="/stories/create" class="ch-form" method="post">
 				<div class="cs-media">
-					<a href="https://www.facebook.com/${request.getAttribute('facebook')?.userId}" class="cs-img">
-						<img src="https://graph.facebook.com/${request.getAttribute('facebook')?.userId}/picture?type=square" width="50" height="50">
+					<a href="https://www.facebook.com/${request.session.facebook.id}" class="cs-img">
+						<img src="https://graph.facebook.com/${request.session.facebook.id}/picture?type=square" width="50" height="50">
 					</a>
 					<div class="cs-bd ch-form-row">
 						Name : <input type="text" name="name" maxlength="60" >

@@ -46,7 +46,7 @@ class FacebookService {
 
 		body.tokenize('&').each {  value ->
 			def split = value.split('=');
-			mapAccessToken[(split[0])] = split[1].decodeURIComponent()
+			mapAccessToken[(split[0])] = split[1].encodeAsURL()
 		}
 
 		Map accessToken = [:]

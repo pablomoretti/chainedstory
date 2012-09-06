@@ -14,6 +14,8 @@ class GrailsRequestUtils {
 		sb << request.getAttribute("javax.servlet.forward.request_uri")
 
 		if(request.getAttribute("javax.servlet.forward.query_string")){
+			
+			sb << "?"
 
 			sb << request.getAttribute("javax.servlet.forward.query_string")
 		}
