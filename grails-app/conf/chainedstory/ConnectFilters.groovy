@@ -22,7 +22,7 @@ class ConnectFilters {
 
 	def filters = {
 
-		all(controller:'stories', action:'*') {
+		all(controller:'sto1ries', action:'*') {
 
 			before = {
 
