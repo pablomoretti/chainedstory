@@ -17,7 +17,9 @@
 				<div class="cs-btn-container">
 					<a href="/stories/start" class="ch-btn ch-btn-big">Start now!</a>
 				</div>
-				<iframe id="facepile" src="http://www.facebook.com/plugins/facepile.php?app_id=424204097615701&amp;max_rows=1&amp;width=200" scrolling="no" frameborder="0"></iframe>
+				<div>
+					<iframe id="facepile" src="http://www.facebook.com/plugins/facepile.php?app_id=424204097615701&amp;max_rows=1&amp;width=200&amp;colorscheme=dark" scrolling="no" frameborder="0"></iframe>
+				</div>
 			</section>
 			<section class="cs-link-view ch-g1-3">
 				<div class="cs-story">
