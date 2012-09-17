@@ -160,6 +160,26 @@ h1, h2, h3, h4, h5, h6 {
 	padding: 10px 20px;
 }
 
+.ch-icon-facebook:before {
+	margin-right: 0.05em;
+	padding-right: 0.4em;
+	border-right: 1px solid #6B1B0B;
+	display: inline-block;
+	vertical-align: initial;
+	position: relative;
+	top: 2px;
+	height: 26px;
+	font-size: 1.2em;
+}
+
+.ch-icon-facebook:before {
+	content: "\f09a";
+}
+
+.lt-ie8 .ch-icon-facebook {
+  *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xf09a;&nbsp;');
+}
+
 
 /*
  * Chained
