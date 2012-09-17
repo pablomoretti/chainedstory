@@ -15,7 +15,7 @@
 				<h2>Create a collaborative story with your friends and others.</h2>
 				<p>ChainedStory is a story created by a group of people that do not know what the whole story contains. Different people write different sentences only knowing what the person before them wrote. Write and share with your friends while the whole story is kept secret till the end.</p>
 				<div class="cs-btn-container">
-					<a href="/stories/start" class="ch-btn ch-btn-big">Start now!</a>
+					<a href="/stories/start" class="ch-btn ch-btn-big">Start now with Facebook!</a>
 				</div>
 				<div>
 					<iframe id="facepile" src="http://www.facebook.com/plugins/facepile.php?app_id=424204097615701&amp;max_rows=1&amp;width=200&amp;colorscheme=dark" scrolling="no" frameborder="0"></iframe>
